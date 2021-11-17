@@ -6,3 +6,4 @@ presentations/**
 .venv/
 .vscode/
 build/
+__pycache__/
