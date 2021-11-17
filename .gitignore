@@ -1,0 +1,8 @@
+documents/**
+downloads/**
+figures/**
+papers/**
+presentations/**
+.venv/
+.vscode/
+build/
