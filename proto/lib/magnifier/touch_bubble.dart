@@ -36,6 +36,7 @@ class _TouchBubbleState extends State<TouchBubble> {
       top: _position.dy - _currentRadius / 2,
       left: _position.dx - _currentRadius / 2,
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onPanStart: _startDragging,
         onPanUpdate: _drag,
         onPanEnd: (_) => _endDragging(),
