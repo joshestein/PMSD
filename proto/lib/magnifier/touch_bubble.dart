@@ -1,35 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class TouchBubble extends StatelessWidget {
+class TouchBubble extends StatefulWidget {
   const TouchBubble(
       {Key? key,
       required this.position,
-      required this.onStartDragging,
-      required this.onDrag,
-      required this.onEndDragging,
-      required this.bubbleSize})
+      required this.onDragCallback,
+      required this.onEndDragCallback,
+      required this.radius})
       : super(key: key);
 
   final Offset position;
-  final double bubbleSize;
-  final Function onStartDragging;
-  final Function onDrag;
-  final Function onEndDragging;
+  final double radius;
+  final Function onDragCallback;
+  final Function onEndDragCallback;
+
+  @override
+  _TouchBubbleState createState() => _TouchBubbleState();
+}
+
+class _TouchBubbleState extends State<TouchBubble> {
+  late Offset _position;
+  late double _currentRadius;
+
+  @override
+  void initState() {
+    _position = widget.position;
+    _currentRadius = widget.radius;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    print('TouchBubble x $position');
     return Positioned(
-      top: position.dy - bubbleSize / 2,
-      left: position.dx - bubbleSize / 2,
+      top: _position.dy - _currentRadius / 2,
+      left: _position.dx - _currentRadius / 2,
       child: GestureDetector(
-        onPanStart: (details) => onStartDragging(details.globalPosition),
-        onPanUpdate: (details) => onDrag(details.globalPosition),
-        onPanEnd: (_) => onEndDragging(),
+        onPanStart: _startDragging,
+        onPanUpdate: _drag,
+        onPanEnd: (_) => _endDragging(),
         child: Container(
-          width: bubbleSize,
-          height: bubbleSize,
+          width: _currentRadius,
+          height: _currentRadius,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
@@ -37,5 +49,30 @@ class TouchBubble extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _startDragging(DragStartDetails details) {
+    Offset position = details.globalPosition;
+    setState(() {
+      _position = position;
+      _currentRadius = widget.radius * 1.5;
+    });
+
+    widget.onDragCallback(position);
+  }
+
+  void _drag(DragUpdateDetails details) {
+    Offset position = details.globalPosition;
+    setState(() {
+      _position = position;
+    });
+    widget.onDragCallback(position);
+  }
+
+  void _endDragging() {
+    setState(() {
+      _currentRadius = widget.radius;
+    });
+    widget.onEndDragCallback();
   }
 }
