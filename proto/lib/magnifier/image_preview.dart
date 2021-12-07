@@ -14,9 +14,11 @@ class ImagePreview extends StatefulWidget {
 class _ImagePreviewState extends State<ImagePreview> {
   static const double bubbleSize = 20;
 
-  Offset position = const Offset(20, 20);
-  double currentBubbleSize = bubbleSize;
-  bool magnifierVisible = false;
+  // We create an array of positions, one position for each keypoint
+  List<Offset> positions = [
+    const Offset(20, 20),
+    const Offset(40, 40),
+  ];
 
   @override
   void initState() {
@@ -39,35 +41,21 @@ class _ImagePreviewState extends State<ImagePreview> {
             image: AssetImage('assets/hanging.jpg'),
           ),
         ),
-        TouchBubble(
-          position: position,
-          onStartDragging: _startDragging,
-          onDrag: _drag,
-          onEndDragging: _endDragging,
-          bubbleSize: currentBubbleSize,
-        )
+        for (Offset position in positions) ...[
+          TouchBubble(
+            position: position,
+            radius: bubbleSize,
+            onDragCallback: (Offset newPosition) {
+              setState(() {
+                _magnifierVisible = true;
+                position = newPosition;
+                _lastDragPosition = newPosition;
+              });
+            },
+            onEndDragCallback: () => setState(() => _magnifierVisible = false),
+          ),
+        ],
       ],
     );
-  }
-
-  void _startDragging(Offset newPosition) {
-    setState(() {
-      position = newPosition;
-      magnifierVisible = true;
-      currentBubbleSize = bubbleSize * 1.5;
-    });
-  }
-
-  void _drag(Offset newPosition) {
-    setState(() {
-      position = newPosition;
-    });
-  }
-
-  void _endDragging() {
-    setState(() {
-      magnifierVisible = false;
-      currentBubbleSize = bubbleSize;
-    });
   }
 }
