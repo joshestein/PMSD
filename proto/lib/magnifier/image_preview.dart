@@ -19,10 +19,11 @@ class _ImagePreviewState extends State<ImagePreview> {
     const Offset(20, 20),
     const Offset(40, 40),
   ];
+  Offset _lastDragPosition = const Offset(0, 0);
+  bool _magnifierVisible = false;
 
   @override
   void initState() {
-    currentBubbleSize = bubbleSize;
     SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.manual,
       overlays: [SystemUiOverlay.bottom],
@@ -35,8 +36,8 @@ class _ImagePreviewState extends State<ImagePreview> {
     return Stack(
       children: [
         Magnifier(
-          position: position,
-          visible: magnifierVisible,
+          position: _lastDragPosition,
+          visible: _magnifierVisible,
           child: const Image(
             image: AssetImage('assets/hanging.jpg'),
           ),
