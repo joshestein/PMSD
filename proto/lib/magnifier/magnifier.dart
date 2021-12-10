@@ -53,6 +53,7 @@ class _MagnifierState extends State<Magnifier> {
 
   Widget _getMagnifier(BuildContext context) {
     return Align(
+      // Align to top left or top right, depending on the position of touch bubble
       alignment: _getAlignment(),
       child: ClipOval(
         child: BackdropFilter(
