@@ -146,7 +146,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Semantics(
-            label: 'image_picker_example_from_gallery',
+            label: 'image_picker_from_gallery',
             child: FloatingActionButton(
               onPressed: () {
                 _onImageButtonPressed(ImageSource.gallery, context: context);
