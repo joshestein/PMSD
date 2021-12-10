@@ -1,10 +1,10 @@
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:proto/magnifier/image_preview.dart';
 
 class ImagePickerScreen extends StatefulWidget {
   const ImagePickerScreen({Key? key}) : super(key: key);
@@ -61,22 +61,13 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
       return retrieveError;
     }
     if (_imageFileList != null) {
-      return Semantics(
-          child: ListView.builder(
-            key: UniqueKey(),
-            itemBuilder: (context, index) {
-              // Why network for web?
-              // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
-              return Semantics(
-                label: 'image_picker_example_picked_image',
-                child: kIsWeb
-                    ? Image.network(_imageFileList![index].path)
-                    : Image.file(File(_imageFileList![index].path)),
-              );
-            },
-            itemCount: _imageFileList!.length,
-          ),
-          label: 'image_picker_example_picked_images');
+      return ListView.builder(
+        key: UniqueKey(),
+        itemBuilder: (context, index) {
+          return ImagePreview(imagePath: _imageFileList![index].path);
+        },
+        itemCount: _imageFileList!.length,
+      );
     } else if (_pickImageError != null) {
       return Text(
         'Pick image error: $_pickImageError',
