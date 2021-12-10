@@ -1,11 +1,15 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proto/magnifier/magnifier.dart';
 import 'package:proto/magnifier/touch_bubble.dart';
 
 class ImagePreview extends StatefulWidget {
-  // TODO: pass image from image_picker to constructor
-  const ImagePreview({Key? key}) : super(key: key);
+  const ImagePreview({Key? key, required this.imagePath}) : super(key: key);
+
+  final String imagePath;
 
   @override
   _ImagePreviewState createState() => _ImagePreviewState();
@@ -31,6 +35,16 @@ class _ImagePreviewState extends State<ImagePreview> {
     super.initState();
   }
 
+  Widget image() {
+    return kDebugMode
+        ? Image.asset('assets/hanging.jpg')
+        // Why network for web?
+        // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
+        : kIsWeb
+            ? Image.network(widget.imagePath)
+            : Image.file(File(widget.imagePath));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -38,9 +52,7 @@ class _ImagePreviewState extends State<ImagePreview> {
         Magnifier(
           position: _lastDragPosition,
           visible: _magnifierVisible,
-          child: const Image(
-            image: AssetImage('assets/hanging.jpg'),
-          ),
+          child: image(),
         ),
         for (Offset position in positions) ...[
           TouchBubble(
