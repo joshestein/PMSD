@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proto/magnifier/magnifier.dart';
 import 'package:proto/magnifier/touch_bubble.dart';
+import 'package:proto/pose_detector.dart';
 
 class ImagePreview extends StatefulWidget {
   const ImagePreview({Key? key, required this.imagePath}) : super(key: key);
