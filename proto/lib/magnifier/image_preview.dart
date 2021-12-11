@@ -20,10 +20,7 @@ class _ImagePreviewState extends State<ImagePreview> {
   late PoseDetector _poseDetector;
 
   // We create an array of positions, one position for each keypoint
-  List<Offset> positions = [
-    const Offset(20, 20),
-    const Offset(40, 40),
-  ];
+  List<Offset> positions = [];
   Offset _lastDragPosition = const Offset(0, 0);
   bool _magnifierVisible = false;
 
@@ -35,6 +32,19 @@ class _ImagePreviewState extends State<ImagePreview> {
     );
     _poseDetector = PoseDetector(widget.imagePath);
     super.initState();
+  }
+
+  Future<List<Offset>> _getInitialPosePositions(Size size) async {
+    if (positions.isEmpty) {
+      var keypoints = await _poseDetector.getKeypoints(size);
+      keypoints.forEach((key, value) {
+        // TODO: exclude som keypoints
+        Offset offset = Offset(value[0], value[1]);
+        positions.add(offset);
+      });
+    }
+
+    return positions;
   }
 
   Widget image() {
