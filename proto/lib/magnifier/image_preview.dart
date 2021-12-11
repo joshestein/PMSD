@@ -57,28 +57,51 @@ class _ImagePreviewState extends State<ImagePreview> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Magnifier(
-          position: _lastDragPosition,
-          visible: _magnifierVisible,
-          child: image(),
-        ),
-        for (Offset position in positions) ...[
-          TouchBubble(
-            position: position,
-            radius: bubbleSize,
-            onDragCallback: (Offset newPosition) {
-              setState(() {
-                _magnifierVisible = true;
-                position = newPosition;
-                _lastDragPosition = newPosition;
-              });
-            },
-            onEndDragCallback: () => setState(() => _magnifierVisible = false),
-          ),
-        ],
-      ],
-    );
+    Size size = MediaQuery.of(context).size;
+    return FutureBuilder<List<Offset>>(
+        future: _getInitialPosePositions(size),
+        builder: (BuildContext context, AsyncSnapshot<List<Offset>> snapshot) {
+          List<Widget> children = [];
+          if (snapshot.hasData) {
+            children = [
+              Stack(
+                children: [
+                  Magnifier(
+                    position: _lastDragPosition,
+                    visible: _magnifierVisible,
+                    child: image(),
+                  ),
+                  for (Offset position in positions) ...[
+                    TouchBubble(
+                      position: position,
+                      radius: bubbleSize,
+                      onDragCallback: (Offset newPosition) {
+                        setState(() {
+                          _magnifierVisible = true;
+                          position = newPosition;
+                          _lastDragPosition = newPosition;
+                        });
+                      },
+                      onEndDragCallback: () =>
+                          setState(() => _magnifierVisible = false),
+                    ),
+                  ],
+                ],
+              )
+            ];
+          } else {
+            children = [
+              const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ];
+          }
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: children,
+            ),
+          );
+        });
   }
 }
