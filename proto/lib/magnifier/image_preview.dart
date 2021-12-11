@@ -40,7 +40,6 @@ class _ImagePreviewState extends State<ImagePreview> {
     if (positions.isEmpty) {
       var keypoints = await _poseDetector.getKeypoints(size);
       keypoints.forEach((key, value) {
-        // TODO: exclude som keypoints
         Offset offset = Offset(value[0], value[1]);
         positions.add(offset);
       });
