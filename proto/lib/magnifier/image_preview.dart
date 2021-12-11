@@ -49,7 +49,7 @@ class _ImagePreviewState extends State<ImagePreview> {
     return positions;
   }
 
-  Widget image() {
+  Widget _getImage() {
     // Why network for web?
     // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
     return kIsWeb
@@ -71,7 +71,7 @@ class _ImagePreviewState extends State<ImagePreview> {
                   Magnifier(
                     position: _lastDragPosition,
                     visible: _magnifierVisible,
-                    child: image(),
+                    child: _getImage(),
                   ),
                   for (Offset position in positions) ...[
                     TouchBubble(
