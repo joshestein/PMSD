@@ -48,13 +48,11 @@ class _ImagePreviewState extends State<ImagePreview> {
   }
 
   Widget image() {
-    return kDebugMode
-        ? Image.asset('assets/hanging.jpg')
-        // Why network for web?
-        // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
-        : kIsWeb
-            ? Image.network(widget.imagePath)
-            : Image.file(File(widget.imagePath));
+    // Why network for web?
+    // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
+    return kIsWeb
+        ? Image.network(widget.imagePath)
+        : Image.file(File(widget.imagePath));
   }
 
   @override
