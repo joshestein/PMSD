@@ -114,6 +114,9 @@ class _ImagePreviewState extends State<ImagePreview> {
               const Center(
                 child: CircularProgressIndicator(),
               ),
+              const Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Center(child: Text('Processing...'))),
             ];
           }
           return Center(
