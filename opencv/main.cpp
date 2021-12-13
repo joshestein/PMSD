@@ -14,6 +14,7 @@ const double A4_LENGTH = 29.7;
 std::vector<std::vector<cv::Point>> findSquares(const std::vector<std::vector<cv::Point>> &contours);
 int getLargestContourIndex(const std::vector<std::vector<cv::Point>> &contours);
 std::pair<double, double> getMillimetresPerPixel(const Point2f vertices[]);
+void drawKeypoints();
 
 // Finds cosine of angle between vectors
 // from pt0->pt1 and from pt0->pt2
@@ -50,7 +51,7 @@ int main(int argc, char **argv) {
   squares = findSquares(contours);
   int largestContourIndex = getLargestContourIndex(squares);
   RotatedRect rect = minAreaRect(squares[largestContourIndex]);
-  std::cout << squares[largestContourIndex].size() << std::endl;
+  drawKeypoints();
 
   for (int i = 0; i < 4; i++) {
     std::cout << squares[largestContourIndex][i] << std::endl;
@@ -154,4 +155,10 @@ std::pair<double, double> getMillimetresPerPixel(const Point2f vertices[]) {
 
   std::cout << millimetresPerPixelWidth << ", " << millimetresPerPixelHeight << std::endl;
   return std::make_pair(millimetresPerPixelWidth, millimetresPerPixelHeight);
+}
+
+void drawKeypoints() {
+  for (int i = 0; i < sizeof keyPoints / sizeof keyPoints[0]; i++) {
+    circle(image, Point(keyPoints[i][0], keyPoints[i][1]), 5, Scalar(0, 0, 255), -1);
+  }
 }
