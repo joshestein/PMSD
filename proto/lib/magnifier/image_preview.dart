@@ -57,6 +57,29 @@ class _ImagePreviewState extends State<ImagePreview> {
         : Image.file(File(widget.imagePath));
   }
 
+  List<Widget> _getTouchBubbles() {
+    List<Widget> list = [];
+    for (int i = 0; i < positions.length; i++) {
+      Offset position = positions[i];
+      list.add(
+        TouchBubble(
+          position: position,
+          radius: bubbleSize,
+          onDragCallback: (Offset newPosition) {
+            setState(() {
+              _magnifierVisible = true;
+              position = newPosition;
+              positions[i] = newPosition;
+              _lastDragPosition = newPosition;
+            });
+          },
+          onEndDragCallback: () => setState(() => _magnifierVisible = false),
+        ),
+      );
+    }
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -73,21 +96,7 @@ class _ImagePreviewState extends State<ImagePreview> {
                     visible: _magnifierVisible,
                     child: _getImage(),
                   ),
-                  for (Offset position in positions) ...[
-                    TouchBubble(
-                      position: position,
-                      radius: bubbleSize,
-                      onDragCallback: (Offset newPosition) {
-                        setState(() {
-                          _magnifierVisible = true;
-                          position = newPosition;
-                          _lastDragPosition = newPosition;
-                        });
-                      },
-                      onEndDragCallback: () =>
-                          setState(() => _magnifierVisible = false),
-                    ),
-                  ],
+                  for (Widget bubble in _getTouchBubbles()) bubble,
                   CustomPaint(
                     painter: EdgePainter(
                       points: positions,
