@@ -71,7 +71,9 @@ class _MagnifierState extends State<Magnifier> {
   void _calculateMatrix() {
     setState(() {
       double newX = widget.position.dx - (widget.radius / 2 / widget.scale);
-      double newY = widget.position.dy - (widget.radius / 2 / widget.scale);
+      // TODO: fix this magic 25
+      double newY =
+          widget.position.dy - (widget.radius / 2 / widget.scale) + 25;
 
       // if (_bubbleCrossesMagnifier()) {
       //   final box = context.findRenderObject() as RenderBox;
