@@ -65,7 +65,7 @@ class PoseDetector {
     return recognitions;
   }
 
-  Future<HashMap<String, List<double>>> getKeypoints(Size screen) async {
+  Future<LinkedHashMap<String, List<double>>> getKeypoints(Size screen) async {
     await loadModel();
     var imageSize = await getImageSize();
     var recognitions = await poseNet(File(imagePath));
@@ -76,7 +76,7 @@ class PoseDetector {
     double factorX = screen.width;
     double factorY = height / width * screen.width;
 
-    HashMap<String, List<double>> hash = HashMap();
+    LinkedHashMap<String, List<double>> hash = LinkedHashMap();
     for (var re in recognitions) {
       for (var keypoints in re["keypoints"].values) {
         if (inclusionKeypoints.contains(keypoints['part'])) {
