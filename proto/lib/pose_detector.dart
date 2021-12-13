@@ -26,7 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tflite/tflite.dart';
 
-const List<String> INCLUSION_KEYPOINTS = [
+const List<String> inclusionKeypoints = [
   'leftEye',
   'leftShoulder',
   'leftHip',
@@ -79,7 +79,7 @@ class PoseDetector {
     HashMap<String, List<double>> hash = HashMap();
     for (var re in recognitions) {
       for (var keypoints in re["keypoints"].values) {
-        if (INCLUSION_KEYPOINTS.contains(keypoints['part'])) {
+        if (inclusionKeypoints.contains(keypoints['part'])) {
           var x = keypoints["x"] * factorX;
           var y = keypoints["y"] * factorY;
           hash.putIfAbsent(keypoints["part"], () => [x, y]);
