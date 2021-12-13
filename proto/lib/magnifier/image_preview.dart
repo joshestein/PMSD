@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proto/edge_painter.dart';
 import 'package:proto/magnifier/magnifier.dart';
 import 'package:proto/magnifier/touch_bubble.dart';
 import 'package:proto/pose_detector.dart';
@@ -87,6 +88,15 @@ class _ImagePreviewState extends State<ImagePreview> {
                           setState(() => _magnifierVisible = false),
                     ),
                   ],
+                  CustomPaint(
+                    painter: EdgePainter(
+                      points: positions,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .secondary
+                          .withOpacity(0.5),
+                    ),
+                  ),
                 ],
               )
             ];
