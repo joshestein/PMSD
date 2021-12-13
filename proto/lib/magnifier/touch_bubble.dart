@@ -53,7 +53,9 @@ class _TouchBubbleState extends State<TouchBubble> {
   }
 
   void _startDragging(DragStartDetails details) {
-    Offset position = details.globalPosition;
+    // We offset by magic 80 to accout for size of magnifier.
+    // TODO: calculate this dynamically
+    Offset position = details.globalPosition.translate(0, -80);
     setState(() {
       _position = position;
       _currentRadius = widget.radius * 1.5;
@@ -63,7 +65,7 @@ class _TouchBubbleState extends State<TouchBubble> {
   }
 
   void _drag(DragUpdateDetails details) {
-    Offset position = details.globalPosition;
+    Offset position = details.globalPosition.translate(0, -80);
     setState(() {
       _position = position;
     });
