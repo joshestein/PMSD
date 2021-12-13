@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgcodecs.hpp>
@@ -12,6 +13,7 @@ const double A4_LENGTH = 29.7;
 
 std::vector<std::vector<cv::Point>> findSquares(const std::vector<std::vector<cv::Point>> &contours);
 int getLargestContourIndex(const std::vector<std::vector<cv::Point>> &contours);
+std::pair<double, double> getMillimetresPerPixel(const Point2f vertices[]);
 
 // Finds cosine of angle between vectors
 // from pt0->pt1 and from pt0->pt2
@@ -68,14 +70,21 @@ int main(int argc, char **argv) {
 
   // TODO: how does this fitted rect compare for accuracy compared to directly
   // using the contour?
-  // Point2f vertices[4];
-  // rect.points(vertices);
-  // for (int i = 0; i < 4; ++i) {
-  //   std::cout << squares[largestContourIndex][i] << std::endl;
-  //   line(image, vertices[i], vertices[(i + 1) % 4], Scalar(0, 255, 0), 2);
-  // }
+  Point2f vertices[4];
+  rect.points(vertices);
+  for (int i = 0; i < 4; ++i) {
+    line(image, vertices[i], vertices[(i + 1) % 4], Scalar(0, 255, 0), 2);
+  }
 
-  polylines(image, squares[largestContourIndex], true, Scalar(0, 255, 0), 3, LINE_AA);
+  std::pair<double, double> mmPerPixel = getMillimetresPerPixel(vertices);
+  std::cout << "mmPerPixel vertices: " << mmPerPixel.first << " " << mmPerPixel.second << std::endl;
+  double xDist = fabs(keyPoints[2][0] - keyPoints[16][0]);
+  double yDist = fabs(keyPoints[2][1] - keyPoints[16][1]);
+  std::cout << sqrt(pow(xDist * mmPerPixel.first, 2) + pow(yDist * mmPerPixel.second, 2)) << std::endl;
+
+  // polylines(image, squares[largestContourIndex], true, Scalar(0, 255, 0), 3, LINE_AA);
+  line(image, Point(keyPoints[2][0], keyPoints[2][1]), Point(keyPoints[16][0], keyPoints[16][1]), Scalar(0, 0, 255), 5,
+       LINE_AA);
 
   const char *sourceWindow = "Source";
   namedWindow(sourceWindow);
@@ -121,4 +130,28 @@ int getLargestContourIndex(const std::vector<std::vector<cv::Point>> &contours) 
     }
   }
   return largestContourIndex;
+}
+
+std::pair<double, double> getMillimetresPerPixel(const Point2f vertices[]) {
+  for (int i = 0; i < 4; i++) {
+    std::cout << "vertex: " << vertices[i] << std::endl;
+  }
+
+  Point2d width1 = Point2d((vertices[0].x + vertices[3].x) / 2, (vertices[0].y + vertices[3].y) / 2);
+  Point2d width2 = Point2d((vertices[1].x + vertices[2].x) / 2, (vertices[1].y + vertices[2].y) / 2);
+  Point2d height1 = Point2d((vertices[2].x + vertices[3].x) / 2, (vertices[2].y + vertices[3].y) / 2);
+  Point2d height2 = Point2d((vertices[1].x + vertices[0].x) / 2, (vertices[1].y + vertices[0].y) / 2);
+
+  double width = sqrt(pow(width1.x - width2.x, 2) + pow(width1.y - width2.y, 2));
+  double height = sqrt(pow(height1.x - height2.x, 2) + pow(height1.y - height2.y, 2));
+
+  line(image, width1, width2, Scalar(0, 0, 255), 5, LINE_AA);
+  line(image, height1, height2, Scalar(0, 255, 255), 5, LINE_AA);
+
+  double millimetresPerPixelHeight = CARD_LENGTH / (height > width ? height : width);
+  double millimetresPerPixelWidth = CARD_WIDTH / (height > width ? width : height);
+  std::cout << "Width:" << width << ", Height: " << height << std::endl;
+
+  std::cout << millimetresPerPixelWidth << ", " << millimetresPerPixelHeight << std::endl;
+  return std::make_pair(millimetresPerPixelWidth, millimetresPerPixelHeight);
 }
