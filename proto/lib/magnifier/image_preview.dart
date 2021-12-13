@@ -19,7 +19,6 @@ class ImagePreview extends StatefulWidget {
 }
 
 class _ImagePreviewState extends State<ImagePreview> {
-  static const double bubbleSize = 20;
   late PoseDetector _poseDetector;
 
   // We create an array of positions, one position for each keypoint
@@ -64,7 +63,6 @@ class _ImagePreviewState extends State<ImagePreview> {
       list.add(
         TouchBubble(
           position: position,
-          radius: bubbleSize,
           onDragCallback: (Offset newPosition) {
             setState(() {
               _magnifierVisible = true;

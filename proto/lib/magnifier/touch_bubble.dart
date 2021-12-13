@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class TouchBubble extends StatefulWidget {
-  const TouchBubble(
-      {Key? key,
-      required this.position,
-      required this.onDragCallback,
-      required this.onEndDragCallback,
-      required this.radius})
-      : super(key: key);
+  const TouchBubble({
+    Key? key,
+    required this.position,
+    required this.onDragCallback,
+    required this.onEndDragCallback,
+  }) : super(key: key);
 
   final Offset position;
-  final double radius;
   final Function onDragCallback;
   final Function onEndDragCallback;
 
@@ -20,13 +18,14 @@ class TouchBubble extends StatefulWidget {
 }
 
 class _TouchBubbleState extends State<TouchBubble> {
+  static const double initialSize = 20;
   late Offset _position;
   late double _currentRadius;
 
   @override
   void initState() {
     _position = widget.position;
-    _currentRadius = widget.radius;
+    _currentRadius = initialSize;
     super.initState();
   }
 
@@ -58,7 +57,7 @@ class _TouchBubbleState extends State<TouchBubble> {
     Offset position = details.globalPosition.translate(0, -80);
     setState(() {
       _position = position;
-      _currentRadius = widget.radius * 1.5;
+      _currentRadius = initialSize * 1.5;
     });
 
     widget.onDragCallback(position);
@@ -74,7 +73,7 @@ class _TouchBubbleState extends State<TouchBubble> {
 
   void _endDragging() {
     setState(() {
-      _currentRadius = widget.radius;
+      _currentRadius = initialSize;
     });
     widget.onEndDragCallback();
   }
