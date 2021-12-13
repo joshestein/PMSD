@@ -61,16 +61,17 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
       return retrieveError;
     }
     if (_imageFileList != null) {
-      return ListView.builder(
-        key: UniqueKey(),
-        itemBuilder: (context, index) {
-          return ImagePreview(imagePath: _imageFileList![index].path);
-        },
-        itemCount: _imageFileList!.length,
-        // Ensure there is no conflicting gesture detection between the ListView
-        // and the GestureDetector of the TouchBubbles.
-        physics: const NeverScrollableScrollPhysics(),
-      );
+      return ImagePreview(imagePath: _imageFileList![0].path);
+      // return ListView.builder(
+      //   key: UniqueKey(),
+      //   itemBuilder: (context, index) {
+      //     return ImagePreview(imagePath: _imageFileList![index].path);
+      //   },
+      //   itemCount: _imageFileList!.length,
+      //   // Ensure there is no conflicting gesture detection between the ListView
+      //   // and the GestureDetector of the TouchBubbles.
+      //   physics: const NeverScrollableScrollPhysics(),
+      // );
     } else if (_pickImageError != null) {
       return Text(
         'Pick image error: $_pickImageError',
