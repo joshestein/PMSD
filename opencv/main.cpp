@@ -6,6 +6,7 @@
 
 using namespace cv;
 
+const std::string BASE_DIR = "/home/josh/Documents/Masters/3rd_semester/PMSD/baby_pics/";
 const int A4_WIDTH = 21;
 const double A4_LENGTH = 29.7;
 
@@ -25,7 +26,7 @@ static double angle(Point pt1, Point pt2, Point pt0) {
 Mat image, imageGray, dst;
 
 int main(int argc, char **argv) {
-  std::string imageName = "hanging.jpg";
+  std::string imageName = BASE_DIR + "hanging.jpg";
   if (argc > 1) {
     imageName = argv[1];
   }
