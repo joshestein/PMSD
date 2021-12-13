@@ -8,8 +8,8 @@
 using namespace cv;
 
 const std::string BASE_DIR = "/home/josh/Documents/Masters/3rd_semester/PMSD/baby_pics/";
-const int A4_WIDTH = 21;
-const double A4_LENGTH = 29.7;
+const double CARD_WIDTH = 6.4;
+const double CARD_LENGTH = 8.9;
 
 std::vector<std::vector<cv::Point>> findSquares(const std::vector<std::vector<cv::Point>> &contours);
 int getLargestContourIndex(const std::vector<std::vector<cv::Point>> &contours);
@@ -29,7 +29,7 @@ static double angle(Point pt1, Point pt2, Point pt0) {
 Mat image, imageGray, dst;
 
 int main(int argc, char **argv) {
-  std::string imageName = BASE_DIR + "hanging.jpg";
+  std::string imageName = BASE_DIR + "card_far.jpg";
   if (argc > 1) {
     imageName = argv[1];
   }
