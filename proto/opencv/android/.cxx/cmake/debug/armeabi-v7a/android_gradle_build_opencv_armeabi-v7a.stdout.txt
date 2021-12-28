@@ -1,0 +1,3 @@
+ninja: Entering directory `/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/.cxx/cmake/debug/armeabi-v7a'
+[1/2] Building CXX object CMakeFiles/opencv.dir/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/ios/Classes/opencvTest.cpp.o
+[2/2] Linking CXX shared library /home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/armeabi-v7a/libopencv.so

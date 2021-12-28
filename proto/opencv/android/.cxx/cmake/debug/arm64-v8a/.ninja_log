@@ -1,0 +1,7 @@
+# ninja log v5
+0	941	1640698470	CMakeFiles/opencv.dir/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/ios/Classes/opencvTest.cpp.o	602eceed7ed12ae9
+942	974	1640698470	/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/arm64-v8a/libopencv.so	5f28d80fe236739f
+0	716	1640698820	CMakeFiles/opencv.dir/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/ios/Classes/opencvTest.cpp.o	602eceed7ed12ae9
+716	757	1640698820	/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/arm64-v8a/libopencv.so	5f28d80fe236739f
+0	783	1640698875	CMakeFiles/opencv.dir/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/ios/Classes/opencvTest.cpp.o	602eceed7ed12ae9
+783	820	1640698875	/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/arm64-v8a/libopencv.so	5f28d80fe236739f

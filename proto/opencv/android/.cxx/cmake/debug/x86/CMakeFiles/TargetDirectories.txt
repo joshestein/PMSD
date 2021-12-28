@@ -1,0 +1,3 @@
+/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/.cxx/cmake/debug/x86/CMakeFiles/rebuild_cache.dir
+/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/.cxx/cmake/debug/x86/CMakeFiles/edit_cache.dir
+/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/.cxx/cmake/debug/x86/CMakeFiles/opencv.dir

@@ -1,0 +1,22 @@
+{
+  "buildFiles": [
+    "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/CMakeLists.txt",
+    "/home/josh/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/home/josh/Android/Sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/home/josh/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/.cxx/cmake/debug/x86_64\" clean"
+  ],
+  "buildTargetsCommand": "/home/josh/Android/Sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/.cxx/cmake/debug/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "opencv-Debug-x86_64": {
+      "artifactName": "opencv",
+      "buildCommand": "/home/josh/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/.cxx/cmake/debug/x86_64\" opencv",
+      "abi": "x86_64",
+      "output": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86_64/libopencv.so",
+      "runtimeFiles": [
+        "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/src/main/cmakeLibs/x86_64/libopencv_java4.so"
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+Executable : /home/josh/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
+arguments : 
+-C
+/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/.cxx/cmake/debug/x86
+opencv
+jvmArgs : 
+
