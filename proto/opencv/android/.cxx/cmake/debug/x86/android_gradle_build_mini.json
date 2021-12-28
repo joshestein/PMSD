@@ -13,7 +13,7 @@
       "artifactName": "opencv",
       "buildCommand": "/home/josh/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/.cxx/cmake/debug/x86\" opencv",
       "abi": "x86",
-      "output": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so",
+      "output": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so",
       "runtimeFiles": [
         "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/src/main/cmakeLibs/x86/libopencv_java4.so"
       ]

@@ -69,9 +69,9 @@ build CMakeFiles/opencv.dir/home/josh/Documents/Masters/3rd_semester/PMSD/proto/
 
 
 #############################################
-# Link the shared library /home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so
+# Link the shared library /home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so
 
-build /home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so: CXX_SHARED_LIBRARY_LINKER__opencv CMakeFiles/opencv.dir/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/ios/Classes/opencvTest.cpp.o | ../../../../src/main/cmakeLibs/x86/libopencv_java4.so
+build /home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so: CXX_SHARED_LIBRARY_LINKER__opencv CMakeFiles/opencv.dir/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/ios/Classes/opencvTest.cpp.o | ../../../../src/main/cmakeLibs/x86/libopencv_java4.so
   LANGUAGE_COMPILE_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -frtti -fexceptions -std=c++11 -O0 -fno-limit-debug-info
   LINK_FLAGS = -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -Wl,--build-id -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments
   LINK_LIBRARIES = ../../../../src/main/cmakeLibs/x86/libopencv_java4.so -latomic -lm
@@ -80,13 +80,13 @@ build /home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/
   PRE_LINK = :
   SONAME = libopencv.so
   SONAME_FLAG = -Wl,-soname,
-  TARGET_FILE = /home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so
+  TARGET_FILE = /home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so
   TARGET_PDB = opencv.so.dbg
 # =============================================================================
 # Target aliases.
 
-build libopencv.so: phony /home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so
-build opencv: phony /home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so
+build libopencv.so: phony /home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so
+build opencv: phony /home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so
 # =============================================================================
 # Folder targets.
 
@@ -98,7 +98,7 @@ build opencv: phony /home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/
 #############################################
 # The main all target.
 
-build all: phony /home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so
+build all: phony /home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates/cmake/debug/obj/x86/libopencv.so
 
 #############################################
 # Make the all target the default.

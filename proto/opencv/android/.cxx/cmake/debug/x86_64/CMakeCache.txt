@@ -123,7 +123,7 @@ CMAKE_FIND_ROOT_PATH:UNINITIALIZED=/home/josh/Documents/Masters/3rd_semester/PMS
 CMAKE_INSTALL_PREFIX:PATH=/usr/local
 
 //No help, variable specified on the command line.
-CMAKE_LIBRARY_OUTPUT_DIRECTORY:UNINITIALIZED=/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86_64
+CMAKE_LIBRARY_OUTPUT_DIRECTORY:UNINITIALIZED=/home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates/cmake/debug/obj/x86_64
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=/home/josh/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld

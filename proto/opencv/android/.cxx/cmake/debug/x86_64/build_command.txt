@@ -11,7 +11,7 @@ arguments :
 -DCMAKE_ANDROID_ARCH_ABI=x86_64
 -DCMAKE_ANDROID_NDK=/home/josh/Android/Sdk/ndk/21.1.6352462
 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
--DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86_64
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates/cmake/debug/obj/x86_64
 -DCMAKE_MAKE_PROGRAM=/home/josh/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
 -DCMAKE_SYSTEM_NAME=Android
 -DCMAKE_SYSTEM_VERSION=16

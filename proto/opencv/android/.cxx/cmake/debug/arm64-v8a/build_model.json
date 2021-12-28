@@ -61,7 +61,7 @@
         },
         {
           "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
-          "value": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/arm64-v8a"
+          "value": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates/cmake/debug/obj/arm64-v8a"
         },
         {
           "name": "CMAKE_MAKE_PROGRAM",
@@ -112,7 +112,7 @@
       "cmakeToolchainFile": "/home/josh/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
       "cxxFolder": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/.cxx",
       "gradleModulePathName": ":opencv",
-      "intermediatesFolder": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates",
+      "intermediatesFolder": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates",
       "makeFile": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/CMakeLists.txt",
       "moduleBuildFile": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android/build.gradle",
       "moduleRootFolder": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/android",
@@ -179,12 +179,12 @@
       "ndkDefaultStl": "LIBCXX_STATIC",
       "ndkVersion": "21.1.6352462",
       "project": {
-        "compilerSettingsCacheFolder": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/android/.cxx",
-        "cxxFolder": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/android/.cxx",
+        "compilerSettingsCacheFolder": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/android/.cxx",
+        "cxxFolder": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/android/.cxx",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
-        "rootBuildGradleFolder": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/android",
+        "rootBuildGradleFolder": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/android",
         "sdkFolder": "/home/josh/Android/Sdk",
         "isPrefabEnabled": false
       },
@@ -201,7 +201,7 @@
         "SYSTEM": {}
       }
     },
-    "objFolder": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj",
+    "objFolder": "/home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates/cmake/debug/obj",
     "variantName": "debug",
     "validAbiList": [
       "ARMEABI_V7A",

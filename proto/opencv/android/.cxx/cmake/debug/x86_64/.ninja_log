@@ -1,7 +1,3 @@
 # ninja log v5
-0	681	1640698472	CMakeFiles/opencv.dir/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/ios/Classes/opencvTest.cpp.o	9c6124ca3fb5e906
-682	699	1640698472	/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86_64/libopencv.so	485a8d4f0bd5254d
-1	607	1640698821	CMakeFiles/opencv.dir/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/ios/Classes/opencvTest.cpp.o	9c6124ca3fb5e906
-607	642	1640698821	/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86_64/libopencv.so	485a8d4f0bd5254d
-1	650	1640698876	CMakeFiles/opencv.dir/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/ios/Classes/opencvTest.cpp.o	9c6124ca3fb5e906
-651	681	1640698876	/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/example/build/opencv/intermediates/cmake/debug/obj/x86_64/libopencv.so	485a8d4f0bd5254d
+0	644	1640701206	CMakeFiles/opencv.dir/home/josh/Documents/Masters/3rd_semester/PMSD/proto/opencv/ios/Classes/opencvTest.cpp.o	9c6124ca3fb5e906
+645	663	1640701206	/home/josh/Documents/Masters/3rd_semester/PMSD/proto/build/opencv/intermediates/cmake/debug/obj/x86_64/libopencv.so	331f283dd013642b
