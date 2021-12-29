@@ -13,11 +13,16 @@ A new flutter plugin project.
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'Classes/**/*.{swift,c,m,h,mm,cpp,plist}'
   s.dependency 'Flutter'
   s.platform = :ios, '8.0'
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
   s.swift_version = '5.0'
+  s.preserve_paths = 'opencv2.framework'
+  s.xcconfig = { 'OTHER_LDFLAGS' => '-framework opencv2' }
+  s.vendored_frameworks = 'opencv2.framework'
+  s.frameworks = 'AVFoundation'
+  s.library = 'c++'
 end
