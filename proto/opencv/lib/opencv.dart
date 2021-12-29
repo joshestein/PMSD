@@ -3,13 +3,14 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:ffi/ffi.dart';
 
 final DynamicLibrary opencvLib = Platform.isAndroid
     ? DynamicLibrary.open('libopencv.so')
     : DynamicLibrary.process();
 
-final int Function(int x, int y) opencvTest = opencvLib
-    .lookup<NativeFunction<Int32 Function(Int32, Int32)>>('opencv_test')
+final double Function(Pointer<Utf8>) pixelsPerMM = opencvLib
+    .lookup<NativeFunction<Double Function(Pointer<Utf8>)>>('get_pixels_per_mm')
     .asFunction();
 
 class OpenCV {
@@ -18,5 +19,17 @@ class OpenCV {
   static Future<String?> get platformVersion async {
     final String? version = await _channel.invokeMethod('getPlatformVersion');
     return version;
+  }
+
+  static Future<double> getPixelsPerMM(String path) async {
+    // final double pixelsPerMM =
+    //     await _channel.invokeMethod('pixelsPerMM', path.toNativeUtf8());
+    double result = pixelsPerMM(path.toNativeUtf8());
+    return result;
+  }
+
+  static double getFastPixelsPerMM(String path) {
+    double result = pixelsPerMM(path.toNativeUtf8());
+    return result;
   }
 }
