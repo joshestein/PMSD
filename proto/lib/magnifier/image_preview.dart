@@ -87,25 +87,43 @@ class _ImagePreviewState extends State<ImagePreview> {
           List<Widget> children = [];
           if (snapshot.hasData) {
             children = [
-              Stack(
-                children: [
-                  Magnifier(
-                    position: _lastDragPosition,
-                    visible: _magnifierVisible,
-                    child: _getImage(),
-                  ),
-                  for (Widget bubble in _getTouchBubbles()) bubble,
-                  CustomPaint(
-                    painter: EdgePainter(
-                      points: positions,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .secondary
-                          .withOpacity(0.5),
+              Expanded(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Magnifier(
+                      position: _lastDragPosition,
+                      visible: _magnifierVisible,
+                      child: _getImage(),
                     ),
-                  ),
-                ],
-              )
+                    Positioned.fill(
+                      child: CustomPaint(
+                        painter: EdgePainter(
+                          points: positions,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.5),
+                        ),
+                      ),
+                    ),
+                    for (Widget bubble in _getTouchBubbles()) bubble,
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: FloatingActionButton(
+                          onPressed: () {},
+                          child: const Icon(Icons.check),
+                          backgroundColor: Colors.green,
+                          heroTag: 'confirm',
+                          tooltip: 'Accept pose',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ];
           } else {
             children = [
