@@ -7,14 +7,12 @@ import 'package:proto/magnifier/magnifier_painter.dart';
 class Magnifier extends StatefulWidget {
   const Magnifier(
       {Key? key,
-      required this.child,
       required this.position,
       this.visible = false,
       this.radius = 80.0,
       this.scale = 1.5})
       : super(key: key);
 
-  final Widget child;
   final Offset position;
   final bool visible;
   final double radius;
@@ -44,8 +42,8 @@ class _MagnifierState extends State<Magnifier> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [
-        widget.child,
+      alignment: Alignment.center,
+      children: <Widget>[
         if (widget.visible) _getMagnifier(context),
       ],
     );

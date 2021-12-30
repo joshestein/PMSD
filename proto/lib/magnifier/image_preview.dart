@@ -91,10 +91,10 @@ class _ImagePreviewState extends State<ImagePreview> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
+                    _getImage(),
                     Magnifier(
                       position: _lastDragPosition,
                       visible: _magnifierVisible,
-                      child: _getImage(),
                     ),
                     Positioned.fill(
                       child: CustomPaint(
