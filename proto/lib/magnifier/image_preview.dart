@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proto/edge_painter.dart';
+import 'package:proto/height_weight_confirmation.dart';
 import 'package:proto/magnifier/magnifier.dart';
 import 'package:proto/magnifier/touch_bubble.dart';
 import 'package:proto/pose_detector.dart';
@@ -113,7 +114,17 @@ class _ImagePreviewState extends State<ImagePreview> {
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: FloatingActionButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // TODO: use mmPerPixel to calculate height
+                            double height = 30.0;
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    HeightWeightConfirmation(height: height),
+                              ),
+                            );
+                          },
                           child: const Icon(Icons.check),
                           backgroundColor: Colors.green,
                           heroTag: 'confirm',
