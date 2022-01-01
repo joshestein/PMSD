@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:opencv/opencv.dart';
 import 'package:proto/edge_painter.dart';
 import 'package:proto/height_weight_confirmation.dart';
 import 'package:proto/magnifier/magnifier.dart';
@@ -21,6 +22,7 @@ class ImagePreview extends StatefulWidget {
 
 class _ImagePreviewState extends State<ImagePreview> {
   late PoseDetector _poseDetector;
+  late double _cmPerPixel;
 
   // We create an array of positions, one position for each keypoint
   List<Offset> positions = [];
@@ -34,6 +36,8 @@ class _ImagePreviewState extends State<ImagePreview> {
       overlays: [SystemUiOverlay.bottom],
     );
     _poseDetector = PoseDetector(widget.imagePath);
+    _cmPerPixel = OpenCV.getFastPixelsPerMM(widget.imagePath) * 10;
+
     super.initState();
   }
 
@@ -79,6 +83,16 @@ class _ImagePreviewState extends State<ImagePreview> {
     return list;
   }
 
+  double _getHeight() {
+    double height = 0.0;
+    for (int i = 0; i < positions.length - 1; i++) {
+      Offset position = positions[i];
+      Offset nextPosition = positions[i + 1];
+      height += (position - nextPosition).distance * _cmPerPixel;
+    }
+    return height;
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -115,13 +129,12 @@ class _ImagePreviewState extends State<ImagePreview> {
                         padding: const EdgeInsets.all(16),
                         child: FloatingActionButton(
                           onPressed: () {
-                            // TODO: use mmPerPixel to calculate height
-                            double height = 30.0;
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    HeightWeightConfirmation(height: height),
+                                builder: (context) => HeightWeightConfirmation(
+                                  height: _getHeight(),
+                                ),
                               ),
                             );
                           },
