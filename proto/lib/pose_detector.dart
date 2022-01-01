@@ -86,7 +86,6 @@ class PoseDetector {
         }
       }
     }
-    print(hash);
     return hash;
   }
 }
