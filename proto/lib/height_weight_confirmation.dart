@@ -14,6 +14,8 @@ class HeightWeightConfirmation extends StatefulWidget {
 
 class _HeightWeightConfirmationState extends State<HeightWeightConfirmation> {
   final _formKey = GlobalKey<FormState>();
+  double? _weight;
+  double? _height; // May be modified via form
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class _HeightWeightConfirmationState extends State<HeightWeightConfirmation> {
                 TextFormField(
                   initialValue: widget.height.toStringAsFixed(2),
                   keyboardType: TextInputType.number,
+                  onSaved: (value) => _height = double.parse(value!),
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Height',
@@ -39,6 +42,7 @@ class _HeightWeightConfirmationState extends State<HeightWeightConfirmation> {
                   ),
                 ),
                 TextFormField(
+                  onSaved: (value) => _weight = double.tryParse(value!),
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
@@ -52,7 +56,10 @@ class _HeightWeightConfirmationState extends State<HeightWeightConfirmation> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _formKey.currentState!.save();
+                          print('Weight: $_weight, height $_height');
+                        },
                         child: const Text('Submit'),
                       ),
                     ),
