@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('1 + 2 = ${opencvTest(1, 2)}\n'),
+          child: Text('1 + 2 = ${OpenCV.getFastPixelsPerMM('test')}\n'),
         ),
       ),
     );
