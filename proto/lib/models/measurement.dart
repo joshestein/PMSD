@@ -20,7 +20,7 @@ class Measurement {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'measurement_id': id,
       'child_id': childId,
       'height': height,
       'weight': weight,
