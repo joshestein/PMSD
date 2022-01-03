@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proto/models/parent.dart';
 
-class AddParentForm extends StatefulWidget {
-  const AddParentForm({Key? key}) : super(key: key);
+class AddPatientForm extends StatefulWidget {
+  const AddPatientForm({Key? key}) : super(key: key);
 
   @override
-  _AddParentFormState createState() => _AddParentFormState();
+  _AddPatientFormState createState() => _AddPatientFormState();
 }
 
-class _AddParentFormState extends State<AddParentForm> {
+class _AddPatientFormState extends State<AddPatientForm> {
   final _formKey = GlobalKey<FormState>();
   String? _idNo;
   String? _name;
