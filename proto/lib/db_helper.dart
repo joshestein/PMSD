@@ -40,7 +40,7 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE IF NOT EXISTS children (
         child_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
+        name TEXT NOT NULL,
         age_in_months TEXT,
         parent_id INTEGER,
 

@@ -82,6 +82,12 @@ class _AddPatientFormState extends State<AddPatientForm> {
             border: UnderlineInputBorder(),
             labelText: 'Child Name',
           ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please give the child a name!';
+            }
+            return null;
+          },
         ),
       ),
       Padding(
@@ -152,7 +158,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
 
     Child child = Child(
       parentId: parentId,
-      name: _childName,
+      name: _childName!,
       ageInMonths: int.tryParse(_childAge ?? ''),
     );
     insertChild(child);

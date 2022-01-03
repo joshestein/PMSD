@@ -4,14 +4,14 @@ import '../main.dart';
 
 class Child {
   final int parentId;
+  final String name;
   final int? id;
-  final String? name;
   final int? ageInMonths;
 
   Child({
     required this.parentId,
+    required this.name,
     this.id,
-    this.name,
     this.ageInMonths,
   });
 
