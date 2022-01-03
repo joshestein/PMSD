@@ -40,7 +40,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
           onSaved: (newValue) => _name = newValue,
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
-            labelText: 'Name',
+            labelText: 'Parent Name',
           ),
         ),
       ),
