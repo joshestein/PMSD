@@ -59,7 +59,7 @@ class Charts extends StatelessWidget {
       getTextStyles: (context, value) => const TextStyle(
         color: Colors.white70,
         fontWeight: FontWeight.bold,
-        fontSize: 14,
+        fontSize: 12,
       ),
     );
   }
@@ -76,7 +76,7 @@ class Charts extends StatelessWidget {
       getTextStyles: (context, value) => const TextStyle(
         color: Colors.white70,
         fontWeight: FontWeight.bold,
-        fontSize: 14,
+        fontSize: 12,
       ),
     );
   }
