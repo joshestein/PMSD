@@ -40,6 +40,8 @@ class DatabaseHelper {
         child_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         age_in_months TEXT,
+        parent_id INTEGER,
+
         FOREIGN KEY(parent_id) REFERENCES parents(parent_id)
       )
     ''');
@@ -50,6 +52,8 @@ class DatabaseHelper {
         weight TEXT,
         height TEXT,
         date TEXT,
+        child_id INTEGER,
+
         FOREIGN KEY(child_id) REFERENCES children(child_id)
       )
     ''');
