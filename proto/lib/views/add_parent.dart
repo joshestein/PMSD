@@ -16,6 +16,58 @@ class _AddPatientFormState extends State<AddPatientForm> {
   String? _number;
   String? _email;
 
+  List<Widget> _buildParentDetailsForm() {
+    return [
+      Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextFormField(
+          onSaved: (newValue) => _idNo = newValue,
+          decoration: const InputDecoration(
+            border: UnderlineInputBorder(),
+            labelText: 'ID Number *',
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter an ID number';
+            }
+            return null;
+          },
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextFormField(
+          onSaved: (newValue) => _name = newValue,
+          decoration: const InputDecoration(
+            border: UnderlineInputBorder(),
+            labelText: 'Name',
+          ),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextFormField(
+          onSaved: (newValue) => _number = newValue,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+            border: UnderlineInputBorder(),
+            labelText: 'Number',
+          ),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextFormField(
+          onSaved: (newValue) => _email = newValue,
+          decoration: const InputDecoration(
+            border: UnderlineInputBorder(),
+            labelText: 'Email',
+          ),
+        ),
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,54 +78,13 @@ class _AddPatientFormState extends State<AddPatientForm> {
         key: _formKey,
         // TODO: make modular form collapsible
         // First part for parent details, second part for child details
-        child: ListView(
+        child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextFormField(
-                onSaved: (newValue) => _idNo = newValue,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'ID Number *',
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter an ID number';
-                  }
-                  return null;
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextFormField(
-                onSaved: (newValue) => _name = newValue,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Name',
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextFormField(
-                onSaved: (newValue) => _number = newValue,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Number',
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextFormField(
-                onSaved: (newValue) => _email = newValue,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Email',
-                ),
-              ),
+            ExpansionTile(
+              title: const Text('Parent Details'),
+              controlAffinity: ListTileControlAffinity.leading,
+              initiallyExpanded: true,
+              children: _buildParentDetailsForm(),
             ),
           ],
         ),
