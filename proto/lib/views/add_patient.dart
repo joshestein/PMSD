@@ -68,6 +68,31 @@ class _AddPatientFormState extends State<AddPatientForm> {
     ];
   }
 
+  List<Widget> _buildChildDetails() {
+    return [
+      Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextFormField(
+          onSaved: (newValue) => _childName = newValue,
+          decoration: const InputDecoration(
+            border: UnderlineInputBorder(),
+            labelText: 'Child Name',
+          ),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextFormField(
+          onSaved: (newValue) => _childAge = newValue,
+          decoration: const InputDecoration(
+            border: UnderlineInputBorder(),
+            labelText: 'Age (in months)',
+          ),
+        ),
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,6 +110,12 @@ class _AddPatientFormState extends State<AddPatientForm> {
               controlAffinity: ListTileControlAffinity.leading,
               initiallyExpanded: true,
               children: _buildParentDetailsForm(),
+            ),
+            ExpansionTile(
+              title: const Text('Child Details'),
+              controlAffinity: ListTileControlAffinity.leading,
+              initiallyExpanded: false,
+              children: _buildChildDetails(),
             ),
           ],
         ),
