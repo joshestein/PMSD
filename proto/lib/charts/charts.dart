@@ -12,12 +12,12 @@ class Charts extends StatelessWidget {
     return OrientationBuilder(builder: (context, orientation) {
       return Padding(
         padding: const EdgeInsets.all(16.0),
-        child: LineChart(_getMaleData(orientation)),
+        child: LineChart(_getMaleData(context, orientation)),
       );
     });
   }
 
-  _getMaleData(Orientation orientation) {
+  _getMaleData(BuildContext context, Orientation orientation) {
     bool rotated = Orientation.landscape == orientation;
 
     return LineChartData(
@@ -29,7 +29,7 @@ class Charts extends StatelessWidget {
         rightTitles: SideTitles(showTitles: false),
         topTitles: SideTitles(showTitles: false),
       ),
-      lineBarsData: _getMaleLineData(),
+      lineBarsData: _getMaleLineData(context),
       borderData: FlBorderData(
         show: true,
         border: const Border(
@@ -57,7 +57,7 @@ class Charts extends StatelessWidget {
         return value.toString();
       },
       getTextStyles: (context, value) => const TextStyle(
-        color: Color(0xff75729e),
+        color: Colors.white70,
         fontWeight: FontWeight.bold,
         fontSize: 14,
       ),
@@ -74,14 +74,14 @@ class Charts extends StatelessWidget {
         return value.toString();
       },
       getTextStyles: (context, value) => const TextStyle(
-        color: Color(0xff75729e),
+        color: Colors.white70,
         fontWeight: FontWeight.bold,
         fontSize: 14,
       ),
     );
   }
 
-  List<LineChartBarData> _getMaleLineData() {
+  List<LineChartBarData> _getMaleLineData(context) {
     List<FlSpot> SD0 = age.mapIndexed((index, month) {
       return FlSpot(month, maleLengthForAgeSD0[index]);
     }).toList();
@@ -105,31 +105,31 @@ class Charts extends StatelessWidget {
     return [
       LineChartBarData(
           isCurved: true,
-          colors: [Colors.green],
+          colors: [Theme.of(context).colorScheme.primary],
           dotData: FlDotData(show: false),
           barWidth: 2,
           spots: SD0),
       LineChartBarData(
           isCurved: true,
-          colors: [Colors.red.shade300],
+          colors: [Theme.of(context).colorScheme.secondary],
           dotData: FlDotData(show: false),
           barWidth: 2,
           spots: SD2),
       LineChartBarData(
           isCurved: true,
-          colors: [Colors.red.shade300],
+          colors: [Theme.of(context).colorScheme.secondary],
           dotData: FlDotData(show: false),
           barWidth: 2,
           spots: SD2_neg),
       LineChartBarData(
           isCurved: true,
-          colors: [Colors.red.shade900],
+          colors: [Theme.of(context).colorScheme.error],
           dotData: FlDotData(show: false),
           barWidth: 2,
           spots: SD3),
       LineChartBarData(
           isCurved: true,
-          colors: [Colors.red.shade900],
+          colors: [Theme.of(context).colorScheme.error],
           dotData: FlDotData(show: false),
           barWidth: 2,
           spots: SD3_neg),
