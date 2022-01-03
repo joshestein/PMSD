@@ -23,12 +23,13 @@ class Child {
       'age_in_months': ageInMonths,
     };
   }
+}
 
-  Future<void> insertChild(Child child) async {
-    await db.insert(
-      'children',
-      child.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+Future<void> insertChild(Child child) async {
+  int id = await db.insert(
+    'children',
+    child.toMap(),
+    conflictAlgorithm: ConflictAlgorithm.replace,
+  );
+  print(await db.query('children', where: 'child_id = ?', whereArgs: [id]));
 }
