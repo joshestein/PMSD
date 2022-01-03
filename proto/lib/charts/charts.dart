@@ -9,11 +9,21 @@ class Charts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OrientationBuilder(builder: (context, orientation) {
-      return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: LineChart(_getMaleData(context, orientation)),
-      );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          'Length for age (male)',
+          style: Theme.of(context).primaryTextTheme.headline4,
+        ),
+        const SizedBox(height: 10), // Add gap between heading and chart
+        Expanded(
+          child: OrientationBuilder(builder: (context, orientation) {
+            return LineChart(_getMaleData(context, orientation));
+          }),
+        ),
+      ],
+    );
     });
   }
 
