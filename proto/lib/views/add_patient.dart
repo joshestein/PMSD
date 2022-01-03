@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proto/models/child.dart';
 import 'package:proto/models/parent.dart';
 
 class AddPatientForm extends StatefulWidget {
@@ -124,18 +125,29 @@ class _AddPatientFormState extends State<AddPatientForm> {
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             _formKey.currentState!.save();
-            // TODO: add blocker if existing parent with same ID number
-            Parent parent = Parent(
-              idCardNo: _idNo!,
-              name: _name,
-              number: _number,
-              email: _email,
-            );
-            insertParent(parent);
+            _insertIntoDatabase();
           }
         },
         child: const Icon(Icons.check),
       ),
     );
+  }
+
+  Future<void> _insertIntoDatabase() async {
+    // TODO: add blocker if existing parent with same ID number
+    Parent parent = Parent(
+      idCardNo: _idNo!,
+      name: _name,
+      number: _number,
+      email: _email,
+    );
+    int parentId = await insertParent(parent);
+
+    Child child = Child(
+      parentId: parentId,
+      name: _childName,
+      ageInMonths: int.tryParse(_childAge ?? ''),
+    );
+    insertChild(child);
   }
 }
