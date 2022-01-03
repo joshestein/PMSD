@@ -23,7 +23,7 @@ class Charts extends StatelessWidget {
           const SizedBox(height: 16), // Add gap between heading and chart
           Expanded(
             child: OrientationBuilder(builder: (context, orientation) {
-              return LineChart(_getMaleData(context, orientation));
+              return LineChart(_getData(context, orientation));
             }),
           ),
         ],
@@ -31,7 +31,7 @@ class Charts extends StatelessWidget {
     );
   }
 
-  _getMaleData(BuildContext context, Orientation orientation) {
+  _getData(BuildContext context, Orientation orientation) {
     bool rotated = Orientation.landscape == orientation;
 
     return LineChartData(
