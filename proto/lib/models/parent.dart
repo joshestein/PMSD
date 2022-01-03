@@ -3,13 +3,15 @@ import 'package:sqflite/sqflite.dart';
 import '../main.dart';
 
 class Parent {
-  final int id;
+  final String idCardNo;
+  final int? id;
   final String? name;
   final int? number;
   final String? email;
 
   const Parent({
-    required this.id,
+    required this.idCardNo,
+    this.id,
     this.name,
     this.number,
     this.email,
@@ -17,6 +19,7 @@ class Parent {
 
   Map<String, dynamic> toMap() {
     return {
+      'id_card_number': idCardNo,
       'id': id,
       'name': name,
       'number': number,

@@ -26,9 +26,11 @@ class DatabaseHelper {
   }
 
   _onCreate(Database db, int version) async {
+    // TODO: Fixed length ID number?
     await db.execute('''
       CREATE TABLE IF NOT EXISTS parents (
         parent_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id_card_number TEXT NOT NULL,
         name TEXT,
         number TEXT,
         email TEXT
