@@ -103,9 +103,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
       ),
       body: Form(
         key: _formKey,
-        // TODO: make modular form collapsible
-        // First part for parent details, second part for child details
-        child: Column(
+        child: ListView(
           children: [
             ExpansionTile(
               title: const Text('Parent Details'),
