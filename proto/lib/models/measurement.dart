@@ -4,18 +4,19 @@ import 'package:sqflite/sqflite.dart';
 import '../main.dart';
 
 class Measurement {
-  final int id;
   final int childId;
   final int height;
   final DateTime date;
+  final int? id;
   final int? weight;
 
   Measurement(
-      {required this.id,
-      required this.childId,
+      {required this.childId,
       required this.height,
-      required this.date,
-      this.weight});
+      this.id,
+      DateTime? inputDate,
+      this.weight})
+      : date = inputDate ?? DateTime.now();
 
   Map<String, dynamic> toMap() {
     return {
