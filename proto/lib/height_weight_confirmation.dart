@@ -58,9 +58,9 @@ class _HeightWeightConfirmationState extends State<HeightWeightConfirmation> {
                       child: ElevatedButton(
                         onPressed: () {
                           _formKey.currentState!.save();
-                          print('Weight: $_weight, height $_height');
+                          // TODO: save to DB
                         },
-                        child: const Text('Submit'),
+                        child: const Text('Save'),
                       ),
                     ),
                   ],
