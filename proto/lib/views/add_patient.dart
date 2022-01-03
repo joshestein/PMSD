@@ -72,7 +72,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Parent'),
+        title: const Text('Add Patient Details'),
       ),
       body: Form(
         key: _formKey,
