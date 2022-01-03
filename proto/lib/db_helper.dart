@@ -31,7 +31,7 @@ class DatabaseHelper {
         parent_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         number TEXT,
-        email TEXT,
+        email TEXT
       )
     ''');
 
