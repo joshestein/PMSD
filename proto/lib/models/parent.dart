@@ -6,7 +6,7 @@ class Parent {
   final String idCardNo;
   final int? id;
   final String? name;
-  final int? number;
+  final String? number;
   final String? email;
 
   const Parent({
