@@ -15,6 +15,8 @@ class _AddPatientFormState extends State<AddPatientForm> {
   String? _name;
   String? _number;
   String? _email;
+  String? _childName;
+  String? _childAge;
 
   List<Widget> _buildParentDetailsForm() {
     return [
