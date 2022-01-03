@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proto/image_picker.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/models/parent.dart';
 
@@ -126,6 +127,12 @@ class _AddPatientFormState extends State<AddPatientForm> {
           if (_formKey.currentState!.validate()) {
             _formKey.currentState!.save();
             _insertIntoDatabase();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ImagePickerScreen(),
+              ),
+            );
           }
         },
         child: const Icon(Icons.check),
