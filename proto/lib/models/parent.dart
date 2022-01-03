@@ -20,7 +20,7 @@ class Parent {
   Map<String, dynamic> toMap() {
     return {
       'id_card_number': idCardNo,
-      'id': id,
+      'parent_id': id,
       'name': name,
       'number': number,
       'email': email,
