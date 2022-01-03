@@ -12,10 +12,12 @@ class Charts extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          'Length for age (male)',
-          style: Theme.of(context).primaryTextTheme.headline4,
-        ),
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Text(
+            'Length for age (male)',
+            style: Theme.of(context).primaryTextTheme.headline4,
+          ),
+        ]),
         const SizedBox(height: 10), // Add gap between heading and chart
         Expanded(
           child: OrientationBuilder(builder: (context, orientation) {
@@ -24,7 +26,6 @@ class Charts extends StatelessWidget {
         ),
       ],
     );
-    });
   }
 
   _getMaleData(BuildContext context, Orientation orientation) {
