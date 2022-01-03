@@ -26,12 +26,20 @@ class Parent {
       'email': email,
     };
   }
+}
 
-  Future<void> insertParent(Parent parent) async {
-    await db.insert(
-      'parents',
-      parent.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+Future<void> insertParent(Parent parent) async {
+  print(parent.id);
+  int id = await db.insert(
+    'parents',
+    parent.toMap(),
+    conflictAlgorithm: ConflictAlgorithm.replace,
+  );
+  print(await db.query('parents', where: 'parent_id = ?', whereArgs: [id]));
+}
+
+Future<List<int>> getAllParentsIds() async {
+  final List<Map<String, dynamic>> maps =
+      await db.query('parents', columns: ['parent_id']);
+  return List.generate(maps.length, (i) => maps[i]['parent_id']);
 }
