@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../main.dart';
@@ -6,7 +7,7 @@ class Measurement {
   final int id;
   final int childId;
   final int height;
-  final String date;
+  final DateTime date;
   final int? weight;
 
   Measurement(
@@ -21,8 +22,8 @@ class Measurement {
       'id': id,
       'childId': childId,
       'height': height,
-      'date': date,
       'weight': weight,
+      'date': DateFormat('yyyy-MM-dd').format(date),
     };
   }
 
