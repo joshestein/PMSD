@@ -49,8 +49,8 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE IF NOT EXISTS measurements (
         measurement_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        weight TEXT,
-        height TEXT,
+        height INTEGER,
+        weight INTEGER,
         date TEXT,
         child_id INTEGER,
 
