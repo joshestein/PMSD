@@ -20,7 +20,7 @@ class Measurement {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'childId': childId,
+      'child_id': childId,
       'height': height,
       'weight': weight,
       'date': DateFormat('yyyy-MM-dd').format(date),
