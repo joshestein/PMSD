@@ -28,7 +28,7 @@ class Parent {
   }
 }
 
-Future<void> insertParent(Parent parent) async {
+Future<int> insertParent(Parent parent) async {
   print(parent.id);
   int id = await db.insert(
     'parents',
@@ -36,6 +36,7 @@ Future<void> insertParent(Parent parent) async {
     conflictAlgorithm: ConflictAlgorithm.replace,
   );
   print(await db.query('parents', where: 'parent_id = ?', whereArgs: [id]));
+  return id;
 }
 
 Future<List<int>> getAllParentsIds() async {
