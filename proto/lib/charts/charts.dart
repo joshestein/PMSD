@@ -9,22 +9,25 @@ class Charts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(
-            'Length for age (male)',
-            style: Theme.of(context).primaryTextTheme.headline4,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Text(
+              'Length for age (male)',
+              style: Theme.of(context).primaryTextTheme.headline4,
+            ),
+          ]),
+          const SizedBox(height: 16), // Add gap between heading and chart
+          Expanded(
+            child: OrientationBuilder(builder: (context, orientation) {
+              return LineChart(_getMaleData(context, orientation));
+            }),
           ),
-        ]),
-        const SizedBox(height: 10), // Add gap between heading and chart
-        Expanded(
-          child: OrientationBuilder(builder: (context, orientation) {
-            return LineChart(_getMaleData(context, orientation));
-          }),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
