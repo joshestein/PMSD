@@ -22,7 +22,17 @@ class Charts extends StatelessWidget {
 
     return LineChartData(
       lineTouchData: LineTouchData(enabled: false),
-      gridData: FlGridData(show: false),
+      gridData: FlGridData(
+        show: true,
+        drawHorizontalLine: true,
+        checkToShowHorizontalLine: (value) => true,
+        getDrawingHorizontalLine: (value) =>
+            FlLine(color: Colors.white.withOpacity(0.1)),
+        drawVerticalLine: true,
+        checkToShowVerticalLine: (value) => true,
+        getDrawingVerticalLine: (value) =>
+            FlLine(color: Colors.white.withOpacity(0.1)),
+      ),
       titlesData: FlTitlesData(
         bottomTitles: _getMonthTitles(rotated),
         leftTitles: _getHeightTitles(),
