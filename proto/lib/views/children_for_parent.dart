@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:proto/image_picker.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/models/parent.dart';
+import 'package:proto/views/add_patient.dart';
 
 class ChildrenForParent extends StatefulWidget {
   final Parent parent;
@@ -41,7 +42,16 @@ class _ChildrenForParentState extends State<ChildrenForParent> {
           }
         },
         controlAffinity: ListTileControlAffinity.leading,
-        trailing: IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+        trailing: IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddPatientForm(parent: widget.parent),
+                ),
+              );
+            },
+            icon: const Icon(Icons.add)),
         children: [
           // TODO: Add a FutureBuilder
           ListView.separated(
