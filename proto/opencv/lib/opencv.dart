@@ -22,8 +22,6 @@ class OpenCV {
   }
 
   static Future<double> getPixelsPerMM(String path) async {
-    // final double pixelsPerMM =
-    //     await _channel.invokeMethod('pixelsPerMM', path.toNativeUtf8());
     double result = pixelsPerMM(path.toNativeUtf8());
     return result;
   }
