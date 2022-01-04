@@ -17,6 +17,13 @@ class Child {
     this.ageInMonths,
   });
 
+  Child.fromMap(Map<String, dynamic> map)
+      : parentId = map['parent_id'],
+        id = map['child_id'],
+        name = map['name'],
+        sex = map['sex'],
+        ageInMonths = map['age_in_months'];
+
   Map<String, dynamic> toMap() {
     return {
       'child_id': id,

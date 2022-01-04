@@ -17,6 +17,13 @@ class Parent {
     this.email,
   });
 
+  Parent.fromMap(Map<String, dynamic> map)
+      : idCardNo = map['id_card_number'],
+        id = map['parent_id'],
+        name = map['name'],
+        number = map['number'],
+        email = map['email'];
+
   Map<String, dynamic> toMap() {
     return {
       'id_card_number': idCardNo,
