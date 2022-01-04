@@ -5,12 +5,14 @@ import '../main.dart';
 class Child {
   final int parentId;
   final String name;
+  final String sex;
   final int? id;
   final int? ageInMonths;
 
   Child({
     required this.parentId,
     required this.name,
+    this.sex = 'M',
     this.id,
     this.ageInMonths,
   });
@@ -19,6 +21,7 @@ class Child {
     return {
       'child_id': id,
       'parent_id': parentId,
+      'sex': sex,
       'name': name,
       'age_in_months': ageInMonths,
     };
