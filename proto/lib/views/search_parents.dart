@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proto/models/parent.dart';
+import 'package:proto/views/add_patient.dart';
 import 'package:proto/views/children_for_parent.dart';
 
 class SearchParents extends StatefulWidget {
@@ -79,6 +80,17 @@ class _SearchParentsState extends State<SearchParents> {
         itemCount: _filteredIds.length,
         itemBuilder: (BuildContext context, int index) {
           return ChildrenForParent(parent: _parents[index]);
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddPatientForm(),
+            ),
+          );
         },
       ),
     );
