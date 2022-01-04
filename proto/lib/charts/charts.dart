@@ -3,9 +3,12 @@ import 'package:flutter/widgets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:proto/charts/chart_data.dart';
 import 'package:collection/collection.dart';
+import 'package:proto/models/child.dart';
 
 class Charts extends StatelessWidget {
-  const Charts({Key? key}) : super(key: key);
+  final Child child;
+
+  const Charts({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class Charts extends StatelessWidget {
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text(
-              'Length for age (male)',
+              'Length for age (${child.sex == 'M' ? 'male' : 'female'})',
               style: Theme.of(context).primaryTextTheme.headline4,
             ),
           ]),
