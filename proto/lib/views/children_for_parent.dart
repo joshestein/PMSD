@@ -39,6 +39,7 @@ class _ChildrenForParentState extends State<ChildrenForParent> {
             _fetchChildren();
           }
         },
+        controlAffinity: ListTileControlAffinity.leading,
         children: [
           // TODO: Add a FutureBuilder
           ListView.builder(
