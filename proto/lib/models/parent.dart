@@ -50,4 +50,10 @@ Future<List<Parent>> getAllParents() async {
   final List<Map<String, dynamic>> maps = await db.query('parents');
   return List.generate(maps.length, (i) => Parent.fromMap(maps[i]));
 }
+
+/// Given an [idCardNo] number, returns the corresponding primary key ID
+Future<int> getParentId(String idCardNo) async {
+  final List<Map<String, dynamic>> maps = await db
+      .query('parents', where: 'id_card_number = ?', whereArgs: [idCardNo]);
+  return maps.first['parent_id'];
 }
