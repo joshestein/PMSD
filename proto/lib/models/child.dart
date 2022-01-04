@@ -43,3 +43,14 @@ Future<void> insertChild(Child child) async {
   );
   print(await db.query('children', where: 'child_id = ?', whereArgs: [id]));
 }
+
+Future<List<Child>> getChildrenForParent(int parentId) async {
+  final List<Map<String, dynamic>> maps = await db.query(
+    'children',
+    where: 'parent_id = ?',
+    whereArgs: [parentId],
+  );
+  return List.generate(maps.length, (i) {
+    return Child.fromMap(maps[i]);
+  });
+}
