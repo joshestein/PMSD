@@ -136,6 +136,7 @@ class _ImagePreviewState extends State<ImagePreview> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => HeightWeightConfirmation(
+                                  child: widget.child,
                                   height: _getHeight(),
                                 ),
                               ),

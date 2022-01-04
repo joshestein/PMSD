@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proto/charts/charts.dart';
+import 'package:proto/models/child.dart';
+import 'package:proto/models/measurement.dart';
 
 class HeightWeightConfirmation extends StatefulWidget {
-  const HeightWeightConfirmation({Key? key, required this.height})
-      : super(key: key);
-
   final double height;
+  final Child child;
+
+  const HeightWeightConfirmation({
+    Key? key,
+    required this.height,
+    required this.child,
+  }) : super(key: key);
 
   @override
   _HeightWeightConfirmationState createState() =>
@@ -58,7 +65,11 @@ class _HeightWeightConfirmationState extends State<HeightWeightConfirmation> {
                       child: ElevatedButton(
                         onPressed: () {
                           _formKey.currentState!.save();
-                          // TODO: save to DB
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => Charts(child: widget.child),
+                            ),
+                          );
                         },
                         child: const Text('Save'),
                       ),
