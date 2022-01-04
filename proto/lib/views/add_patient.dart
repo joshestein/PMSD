@@ -5,6 +5,7 @@ import 'package:proto/models/child.dart';
 import 'package:proto/models/parent.dart';
 
 class AddPatientForm extends StatefulWidget {
+  // TODO: allow passing initial parent details to populate parent module
   const AddPatientForm({Key? key}) : super(key: key);
 
   @override
@@ -13,6 +14,9 @@ class AddPatientForm extends StatefulWidget {
 
 class _AddPatientFormState extends State<AddPatientForm> {
   final _formKey = GlobalKey<FormState>();
+  // TODO: make other sections collapse when current section is active
+  // bool _parentCollapsed = false;
+  // bool _childCollapsed = true;
   String? _idNo;
   String? _name;
   String? _number;
