@@ -53,7 +53,7 @@ class Charts extends StatelessWidget {
         rightTitles: SideTitles(showTitles: false),
         topTitles: SideTitles(showTitles: false),
       ),
-      lineBarsData: _getMaleLineData(context),
+      lineBarsData: _getLineData(context),
       borderData: FlBorderData(
         show: true,
         border: const Border(
@@ -105,7 +105,7 @@ class Charts extends StatelessWidget {
     );
   }
 
-  List<LineChartBarData> _getMaleLineData(context) {
+  List<LineChartBarData> _getLineData(context) {
     List<FlSpot> SD0 = age.mapIndexed((index, month) {
       return FlSpot(month, maleLengthForAgeSD0[index]);
     }).toList();
