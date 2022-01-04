@@ -42,13 +42,17 @@ class _ChildrenForParentState extends State<ChildrenForParent> {
         controlAffinity: ListTileControlAffinity.leading,
         children: [
           // TODO: Add a FutureBuilder
-          ListView.builder(
+          ListView.separated(
             itemCount: _children.length,
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text(_children[index].name),
                 subtitle: Text(_children[index].ageInMonths ?? ''),
+                onTap: () {},
               );
+            },
+            separatorBuilder: (context, index) {
+              return const Divider();
             },
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
