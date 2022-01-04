@@ -15,7 +15,7 @@ class _SearchParentsState extends State<SearchParents> {
   late List<String> _parentIds;
   List<String> _filteredIds = [];
   bool _isSearching = false;
-  Widget _appBarTitle = const Text('Search Parents');
+  Widget _appBarTitle = const Text('Parents');
 
   final TextEditingController _controller = TextEditingController();
 
