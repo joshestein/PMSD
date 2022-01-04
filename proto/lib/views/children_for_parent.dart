@@ -55,7 +55,8 @@ class _ChildrenForParentState extends State<ChildrenForParent> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ImagePickerScreen(),
+                      builder: (context) =>
+                          ImagePickerScreen(child: _children[index]),
                     ),
                   );
                 },
