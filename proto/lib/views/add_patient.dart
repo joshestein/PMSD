@@ -177,14 +177,22 @@ class _AddPatientFormState extends State<AddPatientForm> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           if (_formKey.currentState!.validate()) {
             _formKey.currentState!.save();
-            _insertIntoDatabase();
+            int parentId = widget.parent?.id ??
+                await insertParent(
+                  Parent(
+                      idCardNo: _idNo!,
+                      name: _name,
+                      number: _number,
+                      email: _email),
+                );
+            Child child = await _insertAndReturnChild(parentId);
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ImagePickerScreen(),
+                builder: (context) => ImagePickerScreen(child: child),
               ),
             );
           }
@@ -194,22 +202,14 @@ class _AddPatientFormState extends State<AddPatientForm> {
     );
   }
 
-  Future<void> _insertIntoDatabase() async {
-    // TODO: add blocker if existing parent with same ID number
-    Parent parent = Parent(
-      idCardNo: _idNo!,
-      name: _name,
-      number: _number,
-      email: _email,
-    );
-    int parentId = await insertParent(parent);
-
+  Future<Child> _insertAndReturnChild(int parentId) async {
     Child child = Child(
       parentId: parentId,
       name: _childName!,
       sex: _childSex,
       ageInMonths: _childAge,
     );
-    insertChild(child);
+    await insertChild(child);
+    return child;
   }
 }
