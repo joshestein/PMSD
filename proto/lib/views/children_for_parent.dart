@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proto/image_picker.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/models/parent.dart';
 
@@ -49,7 +50,14 @@ class _ChildrenForParentState extends State<ChildrenForParent> {
               return ListTile(
                 title: Text(_children[index].name),
                 subtitle: Text(_children[index].ageInMonths ?? ''),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ImagePickerScreen(),
+                    ),
+                  );
+                },
               );
             },
             separatorBuilder: (context, index) {
