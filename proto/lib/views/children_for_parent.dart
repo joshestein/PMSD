@@ -40,6 +40,7 @@ class _ChildrenForParentState extends State<ChildrenForParent> {
           }
         },
         controlAffinity: ListTileControlAffinity.leading,
+        trailing: IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
         children: [
           // TODO: Add a FutureBuilder
           ListView.separated(
