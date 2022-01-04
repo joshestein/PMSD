@@ -4,14 +4,14 @@ import 'package:proto/models/parent.dart';
 import 'package:proto/views/add_patient.dart';
 import 'package:proto/views/children_for_parent.dart';
 
-class SearchParents extends StatefulWidget {
-  const SearchParents({Key? key}) : super(key: key);
+class Parents extends StatefulWidget {
+  const Parents({Key? key}) : super(key: key);
 
   @override
-  _SearchParentsState createState() => _SearchParentsState();
+  _ParentsState createState() => _ParentsState();
 }
 
-class _SearchParentsState extends State<SearchParents> {
+class _ParentsState extends State<Parents> {
   late List<Parent> _parents;
   late List<String> _parentIds;
   List<String> _filteredIds = [];
