@@ -156,13 +156,19 @@ class _AddPatientFormState extends State<AddPatientForm> {
         child: ListView(
           children: [
             ExpansionTile(
-              title: const Text('Parent Details'),
+              title: Text(
+                'Parent Details',
+                style: Theme.of(context).textTheme.headline6,
+              ),
               controlAffinity: ListTileControlAffinity.leading,
-              initiallyExpanded: true,
+              initiallyExpanded: widget.parent == null,
               children: _buildParentDetailsForm(),
             ),
             ExpansionTile(
-              title: const Text('Child Details'),
+              title: Text(
+                'Child Details',
+                style: Theme.of(context).textTheme.headline6,
+              ),
               controlAffinity: ListTileControlAffinity.leading,
               initiallyExpanded: false,
               children: _buildChildDetails(),
