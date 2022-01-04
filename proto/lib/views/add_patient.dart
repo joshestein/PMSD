@@ -193,7 +193,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
       parentId: parentId,
       name: _childName!,
       sex: _childSex,
-      ageInMonths: int.tryParse(_childAge ?? ''),
+      ageInMonths: _childAge,
     );
     insertChild(child);
   }

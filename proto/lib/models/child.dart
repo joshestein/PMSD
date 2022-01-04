@@ -7,7 +7,7 @@ class Child {
   final String name;
   final String sex;
   final int? id;
-  final int? ageInMonths;
+  final String? ageInMonths;
 
   Child({
     required this.parentId,
