@@ -49,7 +49,8 @@ class _ChildrenForParentState extends State<ChildrenForParent> {
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text(_children[index].name),
-                subtitle: Text(_children[index].ageInMonths ?? ''),
+                subtitle:
+                    Text('Age: ${_children[index].ageInMonths ?? 0} months'),
                 onTap: () {
                   Navigator.push(
                     context,
