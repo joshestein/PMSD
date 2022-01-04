@@ -32,7 +32,8 @@ class _ChildrenForParentState extends State<ChildrenForParent> {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-        title: Text(widget.parent.idCardNo),
+        title: Text(widget.parent.idCardNo,
+            style: Theme.of(context).textTheme.headline6),
         onExpansionChanged: (value) {
           if (!_fetched) {
             _fetchChildren();
