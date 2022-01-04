@@ -13,8 +13,7 @@ class Parents extends StatefulWidget {
 
 class _ParentsState extends State<Parents> {
   late List<Parent> _parents;
-  late List<String> _parentIds;
-  List<String> _filteredIds = [];
+  List<Parent> _filteredParents = [];
   bool _isSearching = false;
   Widget _appBarTitle = const Text('Parents');
 
@@ -25,8 +24,7 @@ class _ParentsState extends State<Parents> {
     getAllParents().then((result) => {
           setState(() {
             _parents = result;
-            _parentIds = _parents.map((parent) => parent.idCardNo).toList();
-            _filteredIds = _parents.map((parent) => parent.idCardNo).toList();
+            _filteredParents = result;
           })
         });
     super.initState();
@@ -54,8 +52,9 @@ class _ParentsState extends State<Parents> {
                         ),
                         onChanged: (text) {
                           setState(() {
-                            _filteredIds = _parentIds
-                                .where((id) => id.contains(text))
+                            _filteredParents = _parents
+                                .where(
+                                    (parent) => parent.idCardNo.contains(text))
                                 .toList();
                           });
                         },
@@ -68,18 +67,18 @@ class _ParentsState extends State<Parents> {
                   onPressed: () {
                     setState(() {
                       _isSearching = false;
-                      _appBarTitle = const Text('Search Parents');
+                      _appBarTitle = const Text('Parents');
                       _controller.clear();
-                      _filteredIds = _parentIds;
+                      _filteredParents = _parents;
                     });
                   },
                 ),
         ],
       ),
       body: ListView.builder(
-        itemCount: _filteredIds.length,
+        itemCount: _filteredParents.length,
         itemBuilder: (BuildContext context, int index) {
-          return ChildrenForParent(parent: _parents[index]);
+          return ChildrenForParent(parent: _filteredParents[index]);
         },
       ),
       floatingActionButton: FloatingActionButton(
