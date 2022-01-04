@@ -9,12 +9,15 @@ import 'package:proto/magnifier/edge_painter.dart';
 import 'package:proto/height_weight_confirmation.dart';
 import 'package:proto/magnifier/magnifier.dart';
 import 'package:proto/magnifier/touch_bubble.dart';
+import 'package:proto/models/child.dart';
 import 'package:proto/pose_detector.dart';
 
 class ImagePreview extends StatefulWidget {
-  const ImagePreview({Key? key, required this.imagePath}) : super(key: key);
-
   final String imagePath;
+  final Child child;
+
+  const ImagePreview({Key? key, required this.imagePath, required this.child})
+      : super(key: key);
 
   @override
   _ImagePreviewState createState() => _ImagePreviewState();

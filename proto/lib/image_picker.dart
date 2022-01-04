@@ -65,7 +65,10 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
       return retrieveError;
     }
     if (_imageFileList != null) {
-      return ImagePreview(imagePath: _imageFileList![0].path);
+      return ImagePreview(
+        child: widget.child,
+        imagePath: _imageFileList![0].path,
+      );
       // return ListView.builder(
       //   key: UniqueKey(),
       //   itemBuilder: (context, index) {
