@@ -170,7 +170,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
                 style: Theme.of(context).textTheme.headline6,
               ),
               controlAffinity: ListTileControlAffinity.leading,
-              initiallyExpanded: false,
+              initiallyExpanded: widget.parent != null,
               children: _buildChildDetails(),
             ),
           ],
