@@ -46,8 +46,8 @@ Future<int> insertParent(Parent parent) async {
   return id;
 }
 
-Future<List<String>> getAllParentsIds() async {
-  final List<Map<String, dynamic>> maps =
-      await db.query('parents', columns: ['id_card_number']);
-  return List.generate(maps.length, (i) => maps[i]['id_card_number']);
+Future<List<Parent>> getAllParents() async {
+  final List<Map<String, dynamic>> maps = await db.query('parents');
+  return List.generate(maps.length, (i) => Parent.fromMap(maps[i]));
+}
 }

@@ -10,6 +10,7 @@ class SearchParents extends StatefulWidget {
 }
 
 class _SearchParentsState extends State<SearchParents> {
+  late List<Parent> _parents;
   late List<String> _parentIds;
   List<String> _filteredIds = [];
   bool _isSearching = false;
@@ -19,11 +20,13 @@ class _SearchParentsState extends State<SearchParents> {
 
   @override
   void initState() {
-    getAllParentsIds().then((result) => setState(() {
-          _parentIds = result;
-          _filteredIds = result;
-        }));
-    // TODO: change this to get all children, _grouped by_ parentId
+    getAllParents().then((result) => {
+          setState(() {
+            _parents = result;
+            _parentIds = _parents.map((parent) => parent.idCardNo).toList();
+            _filteredIds = _parents.map((parent) => parent.idCardNo).toList();
+          })
+        });
     super.initState();
   }
 
