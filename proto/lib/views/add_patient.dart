@@ -18,6 +18,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
   String? _number;
   String? _email;
   String? _childName;
+  String _childSex = 'M';
   String? _childAge;
 
   List<Widget> _buildParentDetailsForm() {
@@ -92,6 +93,34 @@ class _AddPatientFormState extends State<AddPatientForm> {
       ),
       Padding(
         padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            const Text(
+              'Sex',
+              style: TextStyle(color: Colors.white70, fontSize: 16.0),
+            ),
+            const SizedBox(width: 16.0),
+            Expanded(
+              child: DropdownButton<String>(
+                  value: _childSex,
+                  isExpanded: true,
+                  items: <String>['M', 'F'].map((String sex) {
+                    return DropdownMenuItem<String>(
+                      value: sex,
+                      child: Text(sex),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _childSex = value!;
+                    });
+                  }),
+            ),
+          ],
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(16.0),
         child: TextFormField(
           onSaved: (newValue) => _childAge = newValue,
           decoration: const InputDecoration(
@@ -159,6 +188,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
     Child child = Child(
       parentId: parentId,
       name: _childName!,
+      sex: _childSex,
       ageInMonths: int.tryParse(_childAge ?? ''),
     );
     insertChild(child);
