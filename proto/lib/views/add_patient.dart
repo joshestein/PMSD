@@ -5,8 +5,9 @@ import 'package:proto/models/child.dart';
 import 'package:proto/models/parent.dart';
 
 class AddPatientForm extends StatefulWidget {
-  // TODO: allow passing initial parent details to populate parent module
-  const AddPatientForm({Key? key}) : super(key: key);
+  final Parent? parent;
+
+  const AddPatientForm({Key? key, this.parent}) : super(key: key);
 
   @override
   _AddPatientFormState createState() => _AddPatientFormState();
@@ -31,6 +32,8 @@ class _AddPatientFormState extends State<AddPatientForm> {
         padding: const EdgeInsets.all(16.0),
         child: TextFormField(
           onSaved: (newValue) => _idNo = newValue,
+          enabled: widget.parent == null,
+          initialValue: widget.parent?.idCardNo,
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
             labelText: 'ID Number *',
@@ -46,6 +49,8 @@ class _AddPatientFormState extends State<AddPatientForm> {
       Padding(
         padding: const EdgeInsets.all(16.0),
         child: TextFormField(
+          enabled: widget.parent == null,
+          initialValue: widget.parent?.name,
           onSaved: (newValue) => _name = newValue,
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
@@ -57,6 +62,8 @@ class _AddPatientFormState extends State<AddPatientForm> {
         padding: const EdgeInsets.all(16.0),
         child: TextFormField(
           onSaved: (newValue) => _number = newValue,
+          enabled: widget.parent == null,
+          initialValue: widget.parent?.number,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
@@ -68,6 +75,8 @@ class _AddPatientFormState extends State<AddPatientForm> {
         padding: const EdgeInsets.all(16.0),
         child: TextFormField(
           onSaved: (newValue) => _email = newValue,
+          enabled: widget.parent == null,
+          initialValue: widget.parent?.email,
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
             labelText: 'Email',
