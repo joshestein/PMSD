@@ -1,6 +1,5 @@
+import 'package:proto/main.dart';
 import 'package:sqflite/sqflite.dart';
-
-import '../main.dart';
 
 class Child {
   final int parentId;
