@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:proto/image_preview.dart';
+import 'package:proto/models/child.dart';
 
+// ignore: must_be_immutable
 class ImagePickerScreen extends StatefulWidget {
-  const ImagePickerScreen({Key? key}) : super(key: key);
+  Child child;
+
+  ImagePickerScreen({Key? key, required this.child}) : super(key: key);
 
   @override
   _ImagePickerScreenState createState() => _ImagePickerScreenState();
@@ -104,7 +108,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kuhle'),
+        title: Text(widget.child.name),
       ),
       body: Center(
         child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
