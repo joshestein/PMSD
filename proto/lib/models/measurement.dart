@@ -27,11 +27,12 @@ class Measurement {
     };
   }
 
-  Future<void> insertMeasurement(Measurement measurement) async {
-    await db.insert(
-      'measurements',
-      measurement.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+Future<void> insertMeasurement(Measurement measurement) async {
+  int id = await db.insert(
+    'measurements',
+    measurement.toMap(),
+    conflictAlgorithm: ConflictAlgorithm.replace,
+  );
+  print(await db
+      .query('measurements', where: 'measurement_id = ?', whereArgs: [id]));
 }
