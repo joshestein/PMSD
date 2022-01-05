@@ -58,13 +58,13 @@ class _ChartsState extends State<Charts> {
       const SizedBox(height: 16), // Add gap between heading and chart
       Expanded(
         child: OrientationBuilder(builder: (context, orientation) {
-          return LineChart(_getData(context, orientation, data));
+          return LineChart(_setupChart(context, orientation, data));
         }),
       ),
     ];
   }
 
-  _getData(BuildContext context, Orientation orientation,
+  _setupChart(BuildContext context, Orientation orientation,
       List<LineChartBarData> data) {
     bool rotated = Orientation.landscape == orientation;
 
