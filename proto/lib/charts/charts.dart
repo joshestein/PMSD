@@ -204,7 +204,7 @@ class _ChartsState extends State<Charts> {
     return [
       LineChartBarData(
           isCurved: true,
-          colors: [Theme.of(context).colorScheme.primary],
+          colors: [Theme.of(context).colorScheme.primary.withOpacity(0.5)],
           dotData: FlDotData(show: false),
           barWidth: 2,
           spots: SD0),
