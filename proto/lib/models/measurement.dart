@@ -35,19 +35,10 @@ class Measurement {
   }
 }
 
-Future<List<Measurement>> getMeasurementsForChild(int childId) async {
-  final List<Map<String, dynamic>> measurements = await db
-      .query('measurements', where: 'child_id = ?', whereArgs: [childId]);
-  return List.generate(
-      measurements.length, (i) => Measurement.fromMap(measurements[i]));
-}
-
 Future<void> insertMeasurement(Measurement measurement) async {
   int id = await db.insert(
     'measurements',
     measurement.toMap(),
     conflictAlgorithm: ConflictAlgorithm.replace,
   );
-  print(await db
-      .query('measurements', where: 'measurement_id = ?', whereArgs: [id]));
 }

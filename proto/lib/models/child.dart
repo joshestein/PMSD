@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:proto/main.dart';
+import 'package:proto/models/measurement.dart';
 import 'package:sqflite/sqflite.dart';
 
 class Child {
@@ -23,6 +24,13 @@ class Child {
         dateOfBirth = DateTime.parse(map['date_of_birth']),
         name = map['name'],
         sex = map['sex'];
+
+  Future<List<Measurement>> get measurements async {
+    final List<Map<String, dynamic>> measurements =
+        await db.query('measurements', where: 'child_id = ?', whereArgs: [id]);
+    return List.generate(
+        measurements.length, (i) => Measurement.fromMap(measurements[i]));
+  }
 
   Map<String, dynamic> toMap() {
     return {
