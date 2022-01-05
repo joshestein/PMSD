@@ -35,13 +35,11 @@ class Parent {
 }
 
 Future<int> insertParent(Parent parent) async {
-  print(parent.id);
   int id = await db.insert(
     'parents',
     parent.toMap(),
     conflictAlgorithm: ConflictAlgorithm.replace,
   );
-  print(await db.query('parents', where: 'parent_id = ?', whereArgs: [id]));
   return id;
 }
 
