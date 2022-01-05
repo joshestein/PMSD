@@ -4,10 +4,10 @@ import 'package:sqflite/sqflite.dart';
 
 class Measurement {
   final int childId;
-  final int height;
+  final double height;
   final DateTime date;
   final int? id;
-  final int? weight;
+  final double? weight;
 
   Measurement(
       {required this.childId,
