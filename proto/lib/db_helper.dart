@@ -42,7 +42,7 @@ class DatabaseHelper {
         child_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         sex TEXT NOT NULL,
-        age_in_months TEXT,
+        date_of_birth TEXT NOT NULL,
         parent_id INTEGER,
 
         FOREIGN KEY(parent_id) REFERENCES parents(parent_id)

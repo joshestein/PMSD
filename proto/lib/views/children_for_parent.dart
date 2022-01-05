@@ -59,8 +59,9 @@ class _ChildrenForParentState extends State<ChildrenForParent> {
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text(_children[index].name),
-                subtitle:
-                    Text('Age: ${_children[index].ageInMonths ?? 0} months'),
+                // Approximate the days in months by dividing the days by 30
+                subtitle: Text(
+                    'Age: ${DateTime.now().difference(_children[index].dateOfBirth).inDays ~/ 30} months'),
                 onTap: () {
                   Navigator.push(
                     context,

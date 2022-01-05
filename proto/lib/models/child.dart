@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:proto/main.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -5,23 +6,23 @@ class Child {
   final int parentId;
   final String name;
   final String sex;
+  final DateTime dateOfBirth;
   final int? id;
-  final String? ageInMonths;
 
   Child({
     required this.parentId,
     required this.name,
+    DateTime? dateOfBirth,
     this.sex = 'M',
     this.id,
-    this.ageInMonths,
-  });
+  }) : this.dateOfBirth = dateOfBirth ?? DateTime.now();
 
   Child.fromMap(Map<String, dynamic> map)
       : parentId = map['parent_id'],
         id = map['child_id'],
+        dateOfBirth = DateTime.parse(map['date_of_birth']),
         name = map['name'],
-        sex = map['sex'],
-        ageInMonths = map['age_in_months'];
+        sex = map['sex'];
 
   Map<String, dynamic> toMap() {
     return {
@@ -29,7 +30,7 @@ class Child {
       'parent_id': parentId,
       'sex': sex,
       'name': name,
-      'age_in_months': ageInMonths,
+      'date_of_birth': DateFormat('yyyy-MM-dd').format(dateOfBirth)
     };
   }
 }
