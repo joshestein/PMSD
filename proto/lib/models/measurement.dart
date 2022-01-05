@@ -17,6 +17,13 @@ class Measurement {
       this.weight})
       : date = inputDate ?? DateTime.now();
 
+  Measurement.fromMap(Map<String, dynamic> map)
+      : id = map['measurement_id'],
+        childId = map['child_id'],
+        height = map['height'],
+        date = DateTime.parse(map['date']),
+        weight = map['weight'];
+
   Map<String, dynamic> toMap() {
     return {
       'measurement_id': id,
@@ -26,6 +33,14 @@ class Measurement {
       'date': DateFormat('yyyy-MM-dd').format(date),
     };
   }
+}
+
+Future<List<Measurement>> getMeasurementsForChild(int childId) async {
+  final List<Map<String, dynamic>> measurements = await db
+      .query('measurements', where: 'child_id = ?', whereArgs: [childId]);
+  return List.generate(
+      measurements.length, (i) => Measurement.fromMap(measurements[i]));
+}
 
 Future<void> insertMeasurement(Measurement measurement) async {
   int id = await db.insert(
