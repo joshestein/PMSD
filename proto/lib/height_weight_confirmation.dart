@@ -56,36 +56,28 @@ class _TextInputMeasurementState extends State<TextInputMeasurement> {
                     suffixText: 'kg',
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          _formKey.currentState!.save();
-                          Measurement measurement = Measurement(
-                            childId: widget.child.id!,
-                            height: _height!,
-                            weight: _weight,
-                          );
-                          insertMeasurement(measurement);
-
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => Charts(child: widget.child),
-                            ),
-                          );
-                        },
-                        child: const Text('Save'),
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _formKey.currentState!.save();
+          Measurement measurement = Measurement(
+            childId: widget.child.id!,
+            height: _height!,
+            weight: _weight,
+          );
+          insertMeasurement(measurement);
+
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => Charts(child: widget.child),
+            ),
+          );
+        },
+        child: const Icon(Icons.check),
       ),
     );
   }
