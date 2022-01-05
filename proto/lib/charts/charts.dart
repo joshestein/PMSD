@@ -17,29 +17,55 @@ class Charts extends StatefulWidget {
 class _ChartsState extends State<Charts> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(
-              'Length for age (${widget.child.sex == 'M' ? 'male' : 'female'})',
-              style: Theme.of(context).primaryTextTheme.headline4,
+    return FutureBuilder<List<LineChartBarData>>(
+        future: _getLineData(context),
+        builder: (context, snapshot) {
+          List<Widget> children;
+          if (snapshot.hasData) {
+            children = [
+              ..._buildChart(snapshot.data!),
+            ];
+          } else {
+            children = [
+              const Center(
+                child: CircularProgressIndicator(),
+              ),
+              const Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Center(child: Text('Drawing...'))),
+            ];
+          }
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: children,
+              ),
             ),
-          ]),
-          const SizedBox(height: 16), // Add gap between heading and chart
-          Expanded(
-            child: OrientationBuilder(builder: (context, orientation) {
-              return LineChart(_getData(context, orientation));
-            }),
-          ),
-        ],
-      ),
-    );
+          );
+        });
   }
 
-  _getData(BuildContext context, Orientation orientation) {
+  _buildChart(List<LineChartBarData> data) {
+    return [
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text(
+          'Length for age (${widget.child.sex == 'M' ? 'male' : 'female'})',
+          style: Theme.of(context).primaryTextTheme.headline4,
+        ),
+      ]),
+      const SizedBox(height: 16), // Add gap between heading and chart
+      Expanded(
+        child: OrientationBuilder(builder: (context, orientation) {
+          return LineChart(_getData(context, orientation, data));
+        }),
+      ),
+    ];
+  }
+
+  _getData(BuildContext context, Orientation orientation,
+      List<LineChartBarData> data) {
     bool rotated = Orientation.landscape == orientation;
 
     return LineChartData(
@@ -61,7 +87,7 @@ class _ChartsState extends State<Charts> {
         rightTitles: SideTitles(showTitles: false),
         topTitles: SideTitles(showTitles: false),
       ),
-      lineBarsData: _getLineData(context),
+      lineBarsData: data,
       borderData: FlBorderData(
         show: true,
         border: const Border(
