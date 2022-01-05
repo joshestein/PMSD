@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:opencv/opencv.dart';
 import 'package:proto/magnifier/edge_painter.dart';
-import 'package:proto/height_weight_confirmation.dart';
+import 'package:proto/text_input_measurement.dart';
 import 'package:proto/magnifier/magnifier.dart';
 import 'package:proto/magnifier/touch_bubble.dart';
 import 'package:proto/models/child.dart';
