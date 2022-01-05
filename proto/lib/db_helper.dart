@@ -54,7 +54,7 @@ class DatabaseHelper {
         measurement_id INTEGER PRIMARY KEY AUTOINCREMENT,
         height REAL,
         weight REAL,
-        date TEXT,
+        date TEXT NOT NULL,
         child_id INTEGER,
 
         FOREIGN KEY(child_id) REFERENCES children(child_id)
