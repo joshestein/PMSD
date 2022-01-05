@@ -5,11 +5,16 @@ import 'package:proto/charts/chart_data.dart';
 import 'package:collection/collection.dart';
 import 'package:proto/models/child.dart';
 
-class Charts extends StatelessWidget {
+class Charts extends StatefulWidget {
   final Child child;
 
   const Charts({Key? key, required this.child}) : super(key: key);
 
+  @override
+  _ChartsState createState() => _ChartsState();
+}
+
+class _ChartsState extends State<Charts> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +24,7 @@ class Charts extends StatelessWidget {
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text(
-              'Length for age (${child.sex == 'M' ? 'male' : 'female'})',
+              'Length for age (${widget.child.sex == 'M' ? 'male' : 'female'})',
               style: Theme.of(context).primaryTextTheme.headline4,
             ),
           ]),
