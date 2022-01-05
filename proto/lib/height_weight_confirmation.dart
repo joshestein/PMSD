@@ -4,22 +4,21 @@ import 'package:proto/charts/charts.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/models/measurement.dart';
 
-class HeightWeightConfirmation extends StatefulWidget {
+class TextInputMeasurement extends StatefulWidget {
   final double height;
   final Child child;
 
-  const HeightWeightConfirmation({
+  const TextInputMeasurement({
     Key? key,
     required this.height,
     required this.child,
   }) : super(key: key);
 
   @override
-  _HeightWeightConfirmationState createState() =>
-      _HeightWeightConfirmationState();
+  _TextInputMeasurementState createState() => _TextInputMeasurementState();
 }
 
-class _HeightWeightConfirmationState extends State<HeightWeightConfirmation> {
+class _TextInputMeasurementState extends State<TextInputMeasurement> {
   final _formKey = GlobalKey<FormState>();
   double? _weight;
   double? _height; // May be modified via form

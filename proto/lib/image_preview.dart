@@ -135,7 +135,7 @@ class _ImagePreviewState extends State<ImagePreview> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HeightWeightConfirmation(
+                                builder: (context) => TextInputMeasurement(
                                   child: widget.child,
                                   height: _getHeight(),
                                 ),
