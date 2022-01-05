@@ -7,7 +7,7 @@ class Child {
   final String name;
   final String sex;
   final DateTime dateOfBirth;
-  final int? id;
+  int? id;
 
   Child({
     required this.parentId,
@@ -41,7 +41,7 @@ Future<void> insertChild(Child child) async {
     child.toMap(),
     conflictAlgorithm: ConflictAlgorithm.replace,
   );
-  print(await db.query('children', where: 'child_id = ?', whereArgs: [id]));
+  child.id ??= id;
 }
 
 Future<List<Child>> getChildrenForParent(int parentId) async {
