@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:proto/charts/charts.dart';
+import 'package:proto/charts/length_for_age.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/models/measurement.dart';
 
