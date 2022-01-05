@@ -30,32 +30,19 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
   final ImagePicker _picker = ImagePicker();
 
   void _onImageButtonPressed(ImageSource source,
-      {BuildContext? context, bool isMultiImage = false}) async {
-    if (isMultiImage) {
-      try {
-        final pickedFileList = await _picker.pickMultiImage();
-        setState(() {
-          _imageFileList = pickedFileList;
-        });
-      } catch (e) {
-        setState(() {
-          _pickImageError = e;
-        });
-      }
-    } else {
-      try {
-        final pickedFile = await _picker.pickImage(
-          source: source,
-          imageQuality: 100,
-        );
-        setState(() {
-          _imageFile = pickedFile;
-        });
-      } catch (e) {
-        setState(() {
-          _pickImageError = e;
-        });
-      }
+      {BuildContext? context}) async {
+    try {
+      final pickedFile = await _picker.pickImage(
+        source: source,
+        imageQuality: 100,
+      );
+      setState(() {
+        _imageFile = pickedFile;
+      });
+    } catch (e) {
+      setState(() {
+        _pickImageError = e;
+      });
     }
   }
 
@@ -69,16 +56,6 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
         child: widget.child,
         imagePath: _imageFileList![0].path,
       );
-      // return ListView.builder(
-      //   key: UniqueKey(),
-      //   itemBuilder: (context, index) {
-      //     return ImagePreview(imagePath: _imageFileList![index].path);
-      //   },
-      //   itemCount: _imageFileList!.length,
-      //   // Ensure there is no conflicting gesture detection between the ListView
-      //   // and the GestureDetector of the TouchBubbles.
-      //   physics: const NeverScrollableScrollPhysics(),
-      // );
     } else if (_pickImageError != null) {
       return Text(
         'Pick image error: $_pickImageError',
@@ -158,22 +135,6 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
               child: const Icon(Icons.photo),
             ),
           ),
-          // TODO: allow processing of multiple images
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 16.0),
-          //   child: FloatingActionButton(
-          //     onPressed: () {
-          //       _onImageButtonPressed(
-          //         ImageSource.gallery,
-          //         context: context,
-          //         isMultiImage: true,
-          //       );
-          //     },
-          //     heroTag: 'image1',
-          //     tooltip: 'Pick Multiple Image from gallery',
-          //     child: const Icon(Icons.photo_library),
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.only(top: 16.0),
             child: FloatingActionButton(
