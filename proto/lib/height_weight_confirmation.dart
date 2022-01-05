@@ -65,6 +65,13 @@ class _HeightWeightConfirmationState extends State<HeightWeightConfirmation> {
                       child: ElevatedButton(
                         onPressed: () {
                           _formKey.currentState!.save();
+                          Measurement measurement = Measurement(
+                            childId: widget.child.id!,
+                            height: _height!,
+                            weight: _weight,
+                          );
+                          insertMeasurement(measurement);
+
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => Charts(child: widget.child),
