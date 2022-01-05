@@ -5,16 +5,16 @@ import 'package:proto/charts/chart_data.dart';
 import 'package:collection/collection.dart';
 import 'package:proto/models/child.dart';
 
-class Charts extends StatefulWidget {
+class LengthForAgeChart extends StatefulWidget {
   final Child child;
 
-  const Charts({Key? key, required this.child}) : super(key: key);
+  const LengthForAgeChart({Key? key, required this.child}) : super(key: key);
 
   @override
-  _ChartsState createState() => _ChartsState();
+  _LengthForAgeChartState createState() => _LengthForAgeChartState();
 }
 
-class _ChartsState extends State<Charts> {
+class _LengthForAgeChartState extends State<LengthForAgeChart> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<LineChartBarData>>(

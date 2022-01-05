@@ -73,7 +73,7 @@ class _TextInputMeasurementState extends State<TextInputMeasurement> {
 
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => Charts(child: widget.child),
+              builder: (context) => LengthForAgeChart(child: widget.child),
             ),
           );
         },
