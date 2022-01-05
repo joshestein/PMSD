@@ -113,25 +113,66 @@ class _ChartsState extends State<Charts> {
     );
   }
 
-  List<LineChartBarData> _getLineData(context) {
+  Future<List<LineChartBarData>> _getLineData(context) async {
+    List<FlSpot> existingMeasurements = (await widget.child.measurements)
+        .map((measurement) => FlSpot(
+              (measurement.date.difference(widget.child.dateOfBirth).inDays ~/
+                      30)
+                  .toDouble(),
+              measurement.height,
+            ))
+        .toList();
+
+    return [
+      ..._getSDCurves(),
+      LineChartBarData(
+          isCurved: true,
+          colors: [Theme.of(context).colorScheme.primary],
+          dotData: FlDotData(show: true),
+          barWidth: 2,
+          spots: existingMeasurements),
+    ];
+  }
+
+  List<LineChartBarData> _getSDCurves() {
     List<FlSpot> SD0 = age.mapIndexed((index, month) {
-      return FlSpot(month, maleLengthForAgeSD0[index]);
+      return FlSpot(
+          month,
+          widget.child.sex == 'M'
+              ? maleLengthForAgeSD0[index]
+              : femaleLengthForAgeSD0[index]);
     }).toList();
 
     List<FlSpot> SD2 = age.mapIndexed((index, month) {
-      return FlSpot(month, maleLengthForAgeSD2[index]);
+      return FlSpot(
+          month,
+          widget.child.sex == 'M'
+              ? maleLengthForAgeSD2[index]
+              : femaleLengthForAgeSD2[index]);
     }).toList();
 
     List<FlSpot> SD2_neg = age.mapIndexed((index, month) {
-      return FlSpot(month, maleLengthForAgeSD2Neg[index]);
+      return FlSpot(
+          month,
+          widget.child.sex == 'M'
+              ? maleLengthForAgeSD2Neg[index]
+              : femaleLengthForAgeSD2Neg[index]);
     }).toList();
 
     List<FlSpot> SD3 = age.mapIndexed((index, month) {
-      return FlSpot(month, maleLengthForAgeSD3[index]);
+      return FlSpot(
+          month,
+          widget.child.sex == 'M'
+              ? maleLengthForAgeSD3[index]
+              : femaleLengthForAgeSD3[index]);
     }).toList();
 
     List<FlSpot> SD3_neg = age.mapIndexed((index, month) {
-      return FlSpot(month, maleLengthForAgeSD3Neg[index]);
+      return FlSpot(
+          month,
+          widget.child.sex == 'M'
+              ? maleLengthForAgeSD3Neg[index]
+              : femaleLengthForAgeSD3Neg[index]);
     }).toList();
 
     return [
