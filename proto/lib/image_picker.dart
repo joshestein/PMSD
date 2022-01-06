@@ -148,7 +148,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(top: 16.0),
+            padding: const EdgeInsets.only(bottom: 16.0),
             child: FloatingActionButton(
               onPressed: () {
                 Navigator.of(context).push(
