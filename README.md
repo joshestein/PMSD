@@ -18,3 +18,11 @@ The real-world object chosen is a [Bicycle Poker playing card](https://en.wikipe
 - `opencv` - initial C++ prototyping code for measuring height
 - `tflite` - Python code for pose detection and segmentation
 - `proto` - mobile app (written in Flutter) for taking images, computing height and viewing growth charts
+
+### TODO
+
+- [] Add documentation
+- [] Add tests
+- [] Allow editing and deletion of existing measurements
+- [] Allow editing child details
+- [] Allow editing parent details
