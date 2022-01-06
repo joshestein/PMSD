@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:opencv/opencv.dart';
 import 'package:proto/magnifier/edge_painter.dart';
-import 'package:proto/text_input_measurement.dart';
+import 'package:proto/measurement_data.dart';
 import 'package:proto/magnifier/magnifier.dart';
 import 'package:proto/magnifier/touch_bubble.dart';
 import 'package:proto/models/child.dart';
@@ -135,7 +135,7 @@ class _ImagePreviewState extends State<ImagePreview> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => TextInputMeasurement(
+                                builder: (context) => MeasurementData(
                                   child: widget.child,
                                   height: _getHeight(),
                                 ),

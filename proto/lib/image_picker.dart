@@ -10,7 +10,7 @@ import 'package:proto/charts/length_for_age.dart';
 import 'package:proto/charts/weight_for_age.dart';
 import 'package:proto/image_preview.dart';
 import 'package:proto/models/child.dart';
-import 'package:proto/text_input_measurement.dart';
+import 'package:proto/measurement_data.dart';
 
 // ignore: must_be_immutable
 class ImagePickerScreen extends StatefulWidget {
