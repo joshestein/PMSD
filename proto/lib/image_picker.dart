@@ -89,6 +89,12 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.child.name),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/', (Route<dynamic> route) => false);
+            },
+            icon: const Icon(Icons.arrow_back)),
       ),
       body: Center(
         child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
