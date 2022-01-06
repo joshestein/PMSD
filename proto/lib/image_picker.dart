@@ -8,6 +8,7 @@ import 'package:proto/charts/fullscreen_length_for_age.dart';
 import 'package:proto/charts/length_for_age.dart';
 import 'package:proto/image_preview.dart';
 import 'package:proto/models/child.dart';
+import 'package:proto/text_input_measurement.dart';
 
 // ignore: must_be_immutable
 class ImagePickerScreen extends StatefulWidget {
@@ -146,6 +147,22 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        TextInputMeasurement(child: widget.child),
+                  ),
+                );
+              },
+              heroTag: 'textMeasurements',
+              tooltip: 'Enter measurements',
+              child: const Icon(Icons.note_add),
+            ),
+          ),
           Semantics(
             label: 'image_picker_from_gallery',
             child: FloatingActionButton(
