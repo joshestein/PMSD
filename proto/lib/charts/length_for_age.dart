@@ -52,7 +52,7 @@ class _LengthForAgeChartState extends State<LengthForAgeChart> {
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text(
           'Length for age (${widget.child.sex == 'M' ? 'male' : 'female'})',
-          style: Theme.of(context).primaryTextTheme.headline4,
+          style: Theme.of(context).primaryTextTheme.headline5,
         ),
       ]),
       const SizedBox(height: 16), // Add gap between heading and chart
