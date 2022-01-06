@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:proto/charts/fullscreen_length_for_age.dart';
+import 'package:proto/charts/fullscreen_weight_for_age.dart';
 import 'package:proto/charts/length_for_age.dart';
+import 'package:proto/charts/weight_for_age.dart';
 import 'package:proto/image_preview.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/text_input_measurement.dart';
@@ -68,6 +70,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
       return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const SizedBox(height: 10),
           Card(
             child: InkWell(
               onTap: () {
@@ -79,6 +82,20 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                 );
               },
               child: LengthForAgeChart(child: widget.child),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Card(
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        FullScreenWeightForAge(child: widget.child),
+                  ),
+                );
+              },
+              child: WeightForAgeChart(child: widget.child),
             ),
           ),
         ],
