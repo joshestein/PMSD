@@ -36,7 +36,7 @@ class Measurement {
 }
 
 Future<void> insertMeasurement(Measurement measurement) async {
-  int id = await db.insert(
+  await db.insert(
     'measurements',
     measurement.toMap(),
     conflictAlgorithm: ConflictAlgorithm.replace,
