@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:proto/charts/length_for_age.dart';
+import 'package:proto/image_picker.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/models/measurement.dart';
 
@@ -71,11 +71,12 @@ class _TextInputMeasurementState extends State<TextInputMeasurement> {
           );
           insertMeasurement(measurement);
 
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => LengthForAgeChart(child: widget.child),
-            ),
-          );
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ImagePickerScreen(child: widget.child),
+              ),
+            );
+          }
         },
         child: const Icon(Icons.check),
       ),
