@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proto/date_picker.dart';
 import 'package:proto/image_picker.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/models/measurement.dart';
@@ -22,6 +23,7 @@ class _TextInputMeasurementState extends State<TextInputMeasurement> {
   final _formKey = GlobalKey<FormState>();
   double? _weight;
   double? _height; // May be modified via form
+  DateTime? _date;
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +64,15 @@ class _TextInputMeasurementState extends State<TextInputMeasurement> {
                     suffixText: 'kg',
                   ),
                 ),
+                const SizedBox(height: 16),
+                DatePicker(
+                  label: 'Date of measurement',
+                  onDateChanged: (newDate) {
+                    setState(() {
+                      _date = newDate;
+                    });
+                  },
+                )
               ],
             ),
           ),
@@ -75,6 +86,7 @@ class _TextInputMeasurementState extends State<TextInputMeasurement> {
               childId: widget.child.id!,
               height: _height!,
               weight: _weight,
+              inputDate: _date,
             );
             insertMeasurement(measurement);
 
