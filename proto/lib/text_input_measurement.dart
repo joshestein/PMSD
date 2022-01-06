@@ -5,6 +5,8 @@ import 'package:proto/image_picker.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/models/measurement.dart';
 
+/// Allows for manually entering measurements for a child.
+/// [height] allows for optional initial height.
 class TextInputMeasurement extends StatefulWidget {
   final double? height;
   final Child child;
