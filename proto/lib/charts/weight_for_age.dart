@@ -114,8 +114,8 @@ class _WeightForAgeChartState extends State<WeightForAgeChart> {
       ),
       minX: 0,
       maxX: 24,
-      minY: 40,
-      maxY: 100,
+      minY: 0,
+      maxY: 18,
     );
   }
 
