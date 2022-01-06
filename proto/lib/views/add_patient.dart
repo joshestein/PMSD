@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
+import 'package:proto/date_picker.dart';
 import 'package:proto/image_picker.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/models/parent.dart';
@@ -26,20 +26,6 @@ class _AddPatientFormState extends State<AddPatientForm> {
   String? _childName;
   String _childSex = 'M';
   DateTime _childDOB = DateTime.now();
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: _childDOB,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
-
-    if (picked != null && picked != _childDOB) {
-      setState(() {
-        _childDOB = picked;
-      });
-    }
-  }
 
   List<Widget> _buildParentDetailsForm() {
     return [
@@ -149,21 +135,13 @@ class _AddPatientFormState extends State<AddPatientForm> {
       ),
       Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            const Text(
-              'Date of birth',
-              style: TextStyle(color: Colors.white70, fontSize: 16.0),
-            ),
-            const SizedBox(width: 16.0),
-            Expanded(
-              child: ElevatedButton.icon(
-                  onPressed: () => _selectDate(context),
-                  icon: const Icon(Icons.calendar_today),
-                  label: Text(DateFormat('dd/MM/yyyy').format(_childDOB))),
-            ),
-          ],
-        ),
+        child: DatePicker(
+            initialDate: _childDOB,
+            onDateChanged: (newDate) {
+              setState(() {
+                _childDOB = newDate;
+              });
+            }),
       ),
     ];
   }
