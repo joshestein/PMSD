@@ -5,12 +5,12 @@ import 'package:proto/models/child.dart';
 import 'package:proto/models/measurement.dart';
 
 class TextInputMeasurement extends StatefulWidget {
-  final double height;
+  final double? height;
   final Child child;
 
   const TextInputMeasurement({
     Key? key,
-    required this.height,
+    this.height,
     required this.child,
   }) : super(key: key);
 
@@ -38,7 +38,7 @@ class _TextInputMeasurementState extends State<TextInputMeasurement> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
-                  initialValue: widget.height.toStringAsFixed(2),
+                  initialValue: widget.height?.toStringAsFixed(2),
                   keyboardType: TextInputType.number,
                   onSaved: (value) => _height = double.parse(value!),
                   decoration: const InputDecoration(
