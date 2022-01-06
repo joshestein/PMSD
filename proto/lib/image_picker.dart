@@ -170,8 +170,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) =>
-                        TextInputMeasurement(child: widget.child),
+                    builder: (context) => MeasurementData(child: widget.child),
                   ),
                 );
               },

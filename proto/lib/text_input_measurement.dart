@@ -7,21 +7,21 @@ import 'package:proto/models/measurement.dart';
 
 /// Allows for manually entering measurements for a child.
 /// [height] allows for optional initial height.
-class TextInputMeasurement extends StatefulWidget {
+class MeasurementData extends StatefulWidget {
   final double? height;
   final Child child;
 
-  const TextInputMeasurement({
+  const MeasurementData({
     Key? key,
     this.height,
     required this.child,
   }) : super(key: key);
 
   @override
-  _TextInputMeasurementState createState() => _TextInputMeasurementState();
+  _MeasurementDataState createState() => _MeasurementDataState();
 }
 
-class _TextInputMeasurementState extends State<TextInputMeasurement> {
+class _MeasurementDataState extends State<MeasurementData> {
   final _formKey = GlobalKey<FormState>();
   double? _weight;
   double? _height; // May be modified via form
@@ -31,7 +31,7 @@ class _TextInputMeasurementState extends State<TextInputMeasurement> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Height and Weight Data'),
+        title: const Text('Measurement Data'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
