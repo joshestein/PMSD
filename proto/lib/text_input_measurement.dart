@@ -27,7 +27,7 @@ class _TextInputMeasurementState extends State<TextInputMeasurement> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Height and Weight Data"),
+        title: const Text('Height and Weight Data'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
