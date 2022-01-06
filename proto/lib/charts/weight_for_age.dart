@@ -98,7 +98,7 @@ class _WeightForAgeChartState extends State<WeightForAgeChart> {
       ),
       titlesData: FlTitlesData(
         bottomTitles: _getMonthTitles(rotated),
-        leftTitles: _getHeightTitles(),
+        leftTitles: _getWeightTitles(),
         rightTitles: SideTitles(showTitles: false),
         topTitles: SideTitles(showTitles: false),
       ),
@@ -137,11 +137,11 @@ class _WeightForAgeChartState extends State<WeightForAgeChart> {
     );
   }
 
-  SideTitles _getHeightTitles() {
+  SideTitles _getWeightTitles() {
     return SideTitles(
       showTitles: true,
       margin: 8,
-      interval: 5,
+      interval: 2,
       reservedSize: 40,
       getTitles: (double value) {
         return value.toString();
