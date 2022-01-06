@@ -22,9 +22,7 @@ class _LengthForAgeChartState extends State<LengthForAgeChart> {
         builder: (context, snapshot) {
           List<Widget> children;
           if (snapshot.hasData) {
-            children = [
-              ..._buildChart(snapshot.data!),
-            ];
+            children = _buildChart(snapshot.data!);
           } else {
             children = [
               const Center(
@@ -47,7 +45,7 @@ class _LengthForAgeChartState extends State<LengthForAgeChart> {
         });
   }
 
-  _buildChart(List<LineChartBarData> data) {
+  List<Widget> _buildChart(List<LineChartBarData> data) {
     return [
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text(
