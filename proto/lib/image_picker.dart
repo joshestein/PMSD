@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:proto/charts/fullscreen_length_for_age.dart';
+import 'package:proto/charts/length_for_age.dart';
 import 'package:proto/image_preview.dart';
 import 'package:proto/models/child.dart';
 
@@ -62,9 +64,23 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
         textAlign: TextAlign.center,
       );
     } else {
-      return const Text(
-        'You have not yet picked an image.',
-        textAlign: TextAlign.center,
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Card(
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        FullScreenLengthForAge(child: widget.child),
+                  ),
+                );
+              },
+              child: LengthForAgeChart(child: widget.child),
+            ),
+          ),
+        ],
       );
     }
   }
