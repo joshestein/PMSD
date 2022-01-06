@@ -13,7 +13,7 @@ class FullScreenLengthForAge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Length for Age'),
+        title: Text('${child.name} - Length for Age'),
       ),
       body: LengthForAgeChart(
         child: child,
