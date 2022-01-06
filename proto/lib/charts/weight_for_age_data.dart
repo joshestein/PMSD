@@ -79,7 +79,9 @@ List<double> maleWeightForAgeSD2Neg = [
   8.9,
   9.1,
   9.2,
-  9.4
+  9.4,
+  9.5,
+  9.7
 ];
 List<double> maleWeightForAgeSD3 = [
   5,
