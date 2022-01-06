@@ -230,7 +230,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
         parentId: parentId,
         name: _childName!,
         sex: _childSex,
-        dateOfBirth: _childDOB);
+        inputDOB: _childDOB);
     await insertChild(child);
     return child;
   }

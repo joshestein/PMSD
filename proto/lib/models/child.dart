@@ -13,10 +13,10 @@ class Child {
   Child({
     required this.parentId,
     required this.name,
-    DateTime? dateOfBirth,
+    DateTime? inputDOB,
     this.sex = 'M',
     this.id,
-  }) : this.dateOfBirth = dateOfBirth ?? DateTime.now();
+  }) : dateOfBirth = inputDOB ?? DateTime.now();
 
   Child.fromMap(Map<String, dynamic> map)
       : parentId = map['parent_id'],
