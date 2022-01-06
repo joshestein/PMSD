@@ -41,6 +41,12 @@ class _TextInputMeasurementState extends State<TextInputMeasurement> {
                   initialValue: widget.height?.toStringAsFixed(2),
                   keyboardType: TextInputType.number,
                   onSaved: (value) => _height = double.parse(value!),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a height';
+                    }
+                    return null;
+                  },
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Height',
@@ -63,13 +69,14 @@ class _TextInputMeasurementState extends State<TextInputMeasurement> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _formKey.currentState!.save();
-          Measurement measurement = Measurement(
-            childId: widget.child.id!,
-            height: _height!,
-            weight: _weight,
-          );
-          insertMeasurement(measurement);
+          if (_formKey.currentState!.validate()) {
+            _formKey.currentState!.save();
+            Measurement measurement = Measurement(
+              childId: widget.child.id!,
+              height: _height!,
+              weight: _weight,
+            );
+            insertMeasurement(measurement);
 
             Navigator.of(context).push(
               MaterialPageRoute(
