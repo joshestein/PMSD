@@ -7,8 +7,11 @@ import 'package:proto/models/child.dart';
 
 class LengthForAgeChart extends StatefulWidget {
   final Child child;
+  final bool fullScreen;
 
-  const LengthForAgeChart({Key? key, required this.child}) : super(key: key);
+  const LengthForAgeChart(
+      {Key? key, required this.child, this.fullScreen = false})
+      : super(key: key);
 
   @override
   _LengthForAgeChartState createState() => _LengthForAgeChartState();
@@ -54,11 +57,24 @@ class _LengthForAgeChartState extends State<LengthForAgeChart> {
         ),
       ]),
       const SizedBox(height: 16), // Add gap between heading and chart
-      Expanded(
-        child: OrientationBuilder(builder: (context, orientation) {
-          return LineChart(_setupChart(context, orientation, data));
-        }),
-      ),
+      // When the widget is nested, it is nested within a Column/ListView.
+      // We want the chart to be fullscreen, thus we wrap with an expanded.
+      // But this leads to a conflicting layout, where the ancestor Column/ListView
+      // is trying to fill the screen, and at the same time the Expand is trying
+      // to maximally fill the current Column. To avoid this, we constrain the
+      // non-fullscreen widget to a fixed size.
+      widget.fullScreen
+          ? Expanded(
+              child: OrientationBuilder(builder: (context, orientation) {
+                return LineChart(_setupChart(context, orientation, data));
+              }),
+            )
+          : SizedBox(
+              height: 200,
+              child: OrientationBuilder(builder: (context, orientation) {
+                return LineChart(_setupChart(context, orientation, data));
+              }),
+            ),
     ];
   }
 
