@@ -23,6 +23,7 @@ The real-world object chosen is a [Bicycle Poker playing card](https://en.wikipe
 
 - [] Add documentation
 - [] Add tests
+- [] Update to newer tensorflow plugin, use newer Pose model
 - [] Allow editing and deletion of existing measurements
 - [] Allow editing child details
 - [] Allow editing parent details
