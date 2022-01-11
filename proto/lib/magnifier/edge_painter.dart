@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+/// Draws edges between given [points].
 class EdgePainter extends CustomPainter {
   final List<Offset> points;
   final Color color;

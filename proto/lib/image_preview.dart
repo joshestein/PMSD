@@ -12,6 +12,8 @@ import 'package:proto/magnifier/touch_bubble.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/pose_detector.dart';
 
+/// Runs pose inference, and displays configurable keypoints in a stack above the image.
+/// The positions can be updated by dragging the keypoints.
 class ImagePreview extends StatefulWidget {
   final String imagePath;
   final Child child;
@@ -64,6 +66,7 @@ class _ImagePreviewState extends State<ImagePreview> {
         : Image.file(File(widget.imagePath));
   }
 
+  // Builds a list of draggable TouchBubbles, one for each pose keypoint.
   List<Widget> _getTouchBubbles() {
     List<Widget> list = [];
     for (int i = 0; i < positions.length; i++) {
@@ -86,6 +89,7 @@ class _ImagePreviewState extends State<ImagePreview> {
     return list;
   }
 
+  // Calculate the heigth of the baby by taking a vector sum of the keypoints, and converting to cm.
   double _getHeight() {
     double height = 0.0;
     for (int i = 0; i < positions.length - 1; i++) {

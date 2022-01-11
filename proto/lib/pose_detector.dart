@@ -34,6 +34,7 @@ const List<String> inclusionKeypoints = [
   'leftAnkle',
 ];
 
+/// A class to run TensorFlow Lite on a given image returning a list of keypoints.
 class PoseDetector {
   final String imagePath;
 
@@ -65,6 +66,8 @@ class PoseDetector {
     return recognitions;
   }
 
+  /// Returns a hashmap of keypoints for each body part.
+  /// We use a LinkedHashMap to preserve the order of the keypoints.
   Future<LinkedHashMap<String, List<double>>> getKeypoints(Size screen) async {
     await loadModel();
     var imageSize = await getImageSize();
@@ -79,6 +82,8 @@ class PoseDetector {
     LinkedHashMap<String, List<double>> hash = LinkedHashMap();
     for (var re in recognitions) {
       for (var keypoints in re["keypoints"].values) {
+        // We only include the keypoints that we want to show.
+        // This was arbitrarily chosen to the left side of the body.
         if (inclusionKeypoints.contains(keypoints['part'])) {
           var x = keypoints["x"] * factorX;
           var y = keypoints["y"] * factorY;

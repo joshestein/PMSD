@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+/// A draggable bubble that stores its [position].
 class TouchBubble extends StatefulWidget {
   const TouchBubble({
     Key? key,

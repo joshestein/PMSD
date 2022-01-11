@@ -6,6 +6,7 @@ import 'package:sqflite/sqflite.dart';
 class DatabaseHelper {
   Future<Database>? _db;
 
+  /// Helper to ensure we only have one instance of the database.
   Future<Database> getDb() {
     _db ??= _initDb();
     return _db!;
@@ -22,7 +23,7 @@ class DatabaseHelper {
   }
 
   _onConfigure(Database db) async {
-    await db.execute('PRAGMA foreign_keys = ON');
+    await db.execute('PRAGMA foreign_keys = ON'); // Allow foreign keys.
   }
 
   _onCreate(Database db, int version) async {
