@@ -9,13 +9,13 @@ class Magnifier extends StatefulWidget {
       {Key? key,
       required this.position,
       this.visible = false,
-      this.radius = 80.0,
+      this.diameter = 80.0,
       this.scale = 1.5})
       : super(key: key);
 
   final Offset position;
   final bool visible;
-  final double radius;
+  final double diameter;
   final double scale;
 
   @override
@@ -59,7 +59,7 @@ class _MagnifierState extends State<Magnifier> {
           child: CustomPaint(
             painter:
                 MagnifierPainter(Theme.of(context).colorScheme.secondary, 2),
-            size: Size(widget.radius, widget.radius),
+            size: Size(widget.diameter, widget.diameter),
           ),
         ),
       ),
@@ -68,8 +68,7 @@ class _MagnifierState extends State<Magnifier> {
 
   void _calculateMatrix() {
     setState(() {
-      double newX = widget.position.dx - (widget.radius / 2 / widget.scale);
-      // TODO: fix this magic 25
+      double newX = widget.position.dx - (widget.diameter / 2 / widget.scale);
       double newY =
           widget.position.dy - (widget.radius / 2 / widget.scale) + 25;
 
@@ -91,7 +90,7 @@ class _MagnifierState extends State<Magnifier> {
   }
 
   bool _bubbleCrossesMagnifier() {
-    return widget.position.dx < widget.radius &&
-        widget.position.dy < widget.radius;
+    return widget.position.dx < widget.diameter &&
+        widget.position.dy < widget.diameter;
   }
 }
