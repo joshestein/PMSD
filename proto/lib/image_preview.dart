@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -41,16 +41,40 @@ class _ImagePreviewState extends State<ImagePreview> {
   Offset _lastDragPosition = const Offset(0, 0);
   bool _magnifierVisible = false;
 
+  // Offsets
+  Size _transformedSize = const Size(1, 1);
+  Offset _transformOffset = const Offset(0, 0);
+
   @override
   void initState() {
     SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.manual,
       overlays: [SystemUiOverlay.bottom],
     );
+
+    _calculateDimensions();
     _poseDetector = PoseDetector(widget.imagePath);
     _cmPerPixel = OpenCV.getFastPixelsPerMM(widget.imagePath) * 10;
 
     super.initState();
+  }
+
+  /// Calculates the true rendered size of the image.
+  /// The scaling factors for width and height are stored in [_transformedSize].
+  /// The offset (to shift the image to the center) is stored in [_transformOffset].
+  void _calculateDimensions() {
+    double widthFactor = widget.renderedSize.width / widget.originalSize.width;
+    double heightFactor =
+        widget.renderedSize.height / widget.originalSize.height;
+    double sizeFactor = min(widthFactor, heightFactor);
+
+    var transformedHeight = widget.originalSize.height * sizeFactor;
+    var topOffset = ((widget.renderedSize.height - transformedHeight) / 2);
+
+    var transformedWidth = widget.originalSize.width * sizeFactor;
+    var leftOffset = ((widget.renderedSize.width - transformedWidth) / 2);
+    _transformOffset = Offset(leftOffset, topOffset);
+    _transformedSize = Size(transformedWidth, transformedHeight);
   }
 
   Future<List<Offset>> _getInitialPosePositions(Size size) async {
