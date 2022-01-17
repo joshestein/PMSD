@@ -8,7 +8,7 @@ import 'package:proto/charts/fullscreen_length_for_age.dart';
 import 'package:proto/charts/fullscreen_weight_for_age.dart';
 import 'package:proto/charts/length_for_age.dart';
 import 'package:proto/charts/weight_for_age.dart';
-import 'package:proto/image_preview.dart';
+import 'package:proto/imaging/image_loader.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/measurement/measurement_data.dart';
 
@@ -57,10 +57,8 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
       return retrieveError;
     }
     if (_imageFileList != null) {
-      return ImagePreview(
-        child: widget.child,
-        imagePath: _imageFileList![0].path,
-      );
+      return ImageLoader(
+          imagePath: _imageFileList![0].path, child: widget.child);
     } else if (_pickImageError != null) {
       return Text(
         'Pick image error: $_pickImageError',
