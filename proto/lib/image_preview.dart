@@ -77,9 +77,8 @@ class _ImagePreviewState extends State<ImagePreview> {
           onDragCallback: (Offset newPosition) {
             setState(() {
               _magnifierVisible = true;
-              position = newPosition;
-              positions[i] = newPosition;
-              _lastDragPosition = newPosition;
+              positions[i] += newPosition;
+              _lastDragPosition = positions[i];
             });
           },
           onEndDragCallback: () => setState(() => _magnifierVisible = false),

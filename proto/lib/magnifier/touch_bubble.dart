@@ -20,12 +20,10 @@ class TouchBubble extends StatefulWidget {
 
 class _TouchBubbleState extends State<TouchBubble> {
   static const double initialSize = 20;
-  late Offset _position;
   late double _currentRadius;
 
   @override
   void initState() {
-    _position = widget.position;
     _currentRadius = initialSize;
     super.initState();
   }
@@ -33,8 +31,11 @@ class _TouchBubbleState extends State<TouchBubble> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: _position.dy - _currentRadius / 2,
-      left: _position.dx - _currentRadius / 2,
+      // The positioning needs to be offset to account for the size of the bubble.
+      // That is, we need to shift the center of the bubble to the top left.
+      // This is equivalent to shifting the top left itself.
+      top: widget.position.dy - _currentRadius / 2,
+      left: widget.position.dx - _currentRadius / 2,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onPanStart: _startDragging,
@@ -53,23 +54,13 @@ class _TouchBubbleState extends State<TouchBubble> {
   }
 
   void _startDragging(DragStartDetails details) {
-    // We offset by magic 80 to accout for size of magnifier.
-    // TODO: calculate this dynamically
-    Offset position = details.globalPosition.translate(0, -80);
     setState(() {
-      _position = position;
       _currentRadius = initialSize * 1.5;
     });
-
-    widget.onDragCallback(position);
   }
 
   void _drag(DragUpdateDetails details) {
-    Offset position = details.globalPosition.translate(0, -80);
-    setState(() {
-      _position = position;
-    });
-    widget.onDragCallback(position);
+    widget.onDragCallback(details.delta);
   }
 
   void _endDragging() {
