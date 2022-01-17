@@ -68,15 +68,11 @@ class _ImageLoaderState extends State<ImageLoader> {
     if (snapshot.hasError) return Text('Error: ${snapshot.error}');
 
     final keyContext = imageKey.currentContext;
-
-    if (keyContext == null) {
-      return Container();
-    }
+    if (keyContext == null) return Container();
 
     final box = keyContext.findRenderObject() as RenderBox;
     if (box.hasSize) {
-      Size originalSize = Size(
-          snapshot.data!.width.toDouble(), snapshot.data!.height.toDouble());
+      Size originalSize = Size(snapshot.data!.width, snapshot.data!.height);
       Size renderedSize = Size(box.size.width, box.size.height);
 
       return ImagePreview(
