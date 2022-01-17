@@ -161,11 +161,9 @@ class _ImagePreviewState extends State<ImagePreview> {
                   child: Center(child: Text('Processing...'))),
             ];
           }
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: children,
-            ),
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: children,
           );
         });
   }
