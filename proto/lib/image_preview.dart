@@ -17,8 +17,15 @@ import 'package:proto/pose_detector.dart';
 class ImagePreview extends StatefulWidget {
   final String imagePath;
   final Child child;
+  final Size originalSize;
+  final Size renderedSize;
 
-  const ImagePreview({Key? key, required this.imagePath, required this.child})
+  const ImagePreview(
+      {Key? key,
+      required this.imagePath,
+      required this.child,
+      required this.originalSize,
+      required this.renderedSize})
       : super(key: key);
 
   @override
