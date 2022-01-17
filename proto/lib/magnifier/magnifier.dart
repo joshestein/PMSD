@@ -39,15 +39,6 @@ class _MagnifierState extends State<Magnifier> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        if (widget.visible) _getMagnifier(context),
-      ],
-    );
-  }
-
-  Widget _getMagnifier(BuildContext context) {
     return Align(
       // Align to top left or top right, depending on the position of touch bubble
       alignment: _getAlignment(),
