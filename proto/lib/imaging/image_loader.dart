@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -48,26 +46,24 @@ class _ImageLoaderState extends State<ImageLoader> {
       children: [
         const Center(child: Text('Loading...')),
         _getImage(),
-        FutureBuilder<ui.Image>(
-            future: loadUiImage(widget.imagePath),
-            builder: (BuildContext context, AsyncSnapshot<ui.Image> snapshot) {
+        FutureBuilder<Size>(
+            future: getImageSize(widget.imagePath),
+            builder: (BuildContext context, snapshot) {
               return _getRenderedSize(snapshot, context);
             }),
       ],
     );
   }
 
-  Future<ui.Image> loadUiImage(String imageAssetPath) async {
-    final Uint8List data = await File(imageAssetPath).readAsBytes();
-    final Completer<ui.Image> completer = Completer();
-    ui.decodeImageFromList(Uint8List.view(data.buffer), (ui.Image image) {
-      return completer.complete(image);
-    });
-    return completer.future;
+  Future<Size> getImageSize(String imagePath) async {
+    var image = File(imagePath);
+    var decodedImage = await decodeImageFromList(image.readAsBytesSync());
+    var width = decodedImage.width.toDouble();
+    var height = decodedImage.height.toDouble();
+    return Size(width, height);
   }
 
-  Widget _getRenderedSize(
-      AsyncSnapshot<ui.Image> snapshot, BuildContext context) {
+  Widget _getRenderedSize(AsyncSnapshot<Size> snapshot, BuildContext context) {
     if (snapshot.connectionState == ConnectionState.waiting) return Container();
     if (snapshot.hasError) return Text('Error: ${snapshot.error}');
 
