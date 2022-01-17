@@ -77,6 +77,7 @@ class _MagnifierState extends State<Magnifier> {
       //   newX -= ((box.size.width - widget.radius) / widget.scale);
       // }
 
+      // Order of operations is important. First scale, then translate.
       final Matrix4 updatedMatrix = Matrix4.identity()
         ..scale(widget.scale, widget.scale)
         ..translate(-newX, -newY);
