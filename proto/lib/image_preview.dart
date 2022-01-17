@@ -58,14 +58,6 @@ class _ImagePreviewState extends State<ImagePreview> {
     return positions;
   }
 
-  Widget _getImage() {
-    // Why network for web?
-    // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
-    return kIsWeb
-        ? Image.network(widget.imagePath)
-        : Image.file(File(widget.imagePath));
-  }
-
   // Builds a list of draggable TouchBubbles, one for each pose keypoint.
   List<Widget> _getTouchBubbles() {
     List<Widget> list = [];
