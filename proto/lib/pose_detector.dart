@@ -34,7 +34,7 @@ const List<String> inclusionKeypoints = [
   'leftAnkle',
 ];
 
-/// A class to run TensorFlow Lite on a given image returning a list of keypoints.
+/// Runs TensorFlow Lite on a given image returning a list of keypoints.
 class PoseDetector {
   final String imagePath;
 
@@ -43,14 +43,6 @@ class PoseDetector {
   Future loadModel() async {
     await Tflite.loadModel(
         model: 'assets/posenet_mv1_075_float_from_checkpoints.tflite');
-  }
-
-  Future<Size> getImageSize() async {
-    var image = File(imagePath);
-    var decodedImage = await decodeImageFromList(image.readAsBytesSync());
-    var width = decodedImage.width.toDouble();
-    var height = decodedImage.height.toDouble();
-    return Size(width, height);
   }
 
   Future poseNet(File image) async {
@@ -70,15 +62,7 @@ class PoseDetector {
   /// We use a LinkedHashMap to preserve the order of the keypoints.
   Future<LinkedHashMap<String, List<double>>> getKeypoints(Size screen) async {
     await loadModel();
-    var imageSize = await getImageSize();
     var recognitions = await poseNet(File(imagePath));
-
-    double width = imageSize.width;
-    double height = imageSize.height;
-
-
-    double factorX = screen.width;
-    double factorY = height / width * screen.width;
 
     LinkedHashMap<String, List<double>> hash = LinkedHashMap();
     for (var re in recognitions) {
@@ -86,8 +70,8 @@ class PoseDetector {
         // We only include the keypoints that we want to show.
         // This was arbitrarily chosen to the left side of the body.
         if (inclusionKeypoints.contains(keypoints['part'])) {
-          var x = keypoints["x"] * factorX;
-          var y = keypoints["y"] * factorY;
+          var x = keypoints["x"];
+          var y = keypoints["y"];
           hash.putIfAbsent(keypoints["part"], () => [x, y]);
         }
       }
