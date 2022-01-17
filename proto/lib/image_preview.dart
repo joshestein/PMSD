@@ -110,7 +110,7 @@ class _ImagePreviewState extends State<ImagePreview> {
             children = [
               Expanded(
                 child: Stack(
-                  alignment: Alignment.center,
+                  fit: StackFit.expand,
                   children: [
                     if (_magnifierVisible)
                       Magnifier(position: _lastDragPosition),
