@@ -81,7 +81,9 @@ class _ImagePreviewState extends State<ImagePreview> {
     if (positions.isEmpty) {
       var keypoints = await _poseDetector.getKeypoints(size);
       keypoints.forEach((key, value) {
-        Offset offset = Offset(value[0], value[1]);
+        Offset offset = Offset(value[0], value[1])
+            .scale(_transformedSize.width, _transformedSize.height)
+            .translate(_transformOffset.dx, _transformOffset.dy);
         positions.add(offset);
       });
     }
