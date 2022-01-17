@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:proto/measurement/image_picker.dart';
+import 'package:proto/imaging/image_picker.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/models/parent.dart';
 import 'package:proto/views/add_patient.dart';
