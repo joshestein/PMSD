@@ -112,20 +112,15 @@ class _ImagePreviewState extends State<ImagePreview> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    _getImage(),
-                    Magnifier(
-                      position: _lastDragPosition,
-                      visible: _magnifierVisible,
-                    ),
-                    Positioned.fill(
-                      child: CustomPaint(
-                        painter: EdgePainter(
-                          points: positions,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .secondary
-                              .withOpacity(0.5),
-                        ),
+                    if (_magnifierVisible)
+                      Magnifier(position: _lastDragPosition),
+                    CustomPaint(
+                      painter: EdgePainter(
+                        points: positions,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(0.5),
                       ),
                     ),
                     for (Widget bubble in _getTouchBubbles()) bubble,

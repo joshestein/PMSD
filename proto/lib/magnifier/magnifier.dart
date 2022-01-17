@@ -8,13 +8,11 @@ class Magnifier extends StatefulWidget {
   const Magnifier(
       {Key? key,
       required this.position,
-      this.visible = false,
       this.diameter = 80.0,
       this.scale = 1.5})
       : super(key: key);
 
   final Offset position;
-  final bool visible;
   final double diameter;
   final double scale;
 
