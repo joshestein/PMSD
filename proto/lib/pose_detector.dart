@@ -45,12 +45,12 @@ class PoseDetector {
         model: 'assets/posenet_mv1_075_float_from_checkpoints.tflite');
   }
 
-  Future getImageSize() async {
+  Future<Size> getImageSize() async {
     var image = File(imagePath);
     var decodedImage = await decodeImageFromList(image.readAsBytesSync());
     var width = decodedImage.width.toDouble();
     var height = decodedImage.height.toDouble();
-    return [width, height];
+    return Size(width, height);
   }
 
   Future poseNet(File image) async {
@@ -73,8 +73,9 @@ class PoseDetector {
     var imageSize = await getImageSize();
     var recognitions = await poseNet(File(imagePath));
 
-    double width = imageSize[0];
-    double height = imageSize[0];
+    double width = imageSize.width;
+    double height = imageSize.height;
+
 
     double factorX = screen.width;
     double factorY = height / width * screen.width;
