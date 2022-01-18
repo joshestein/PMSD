@@ -1,16 +1,20 @@
 # proto
 
-A new Flutter project.
+This is the main flutter application. It is responsible for image picking (via storage or from taking a photo using the camera), pose detection, finding the reference object and persistent storage of data. Manual height and weight measurements can also be entered by a user.
 
-## Getting Started
+## Dependencies
 
-This project is a starting point for a Flutter application.
+1. `image_picker` - allows for images to be taken with the camera, or selected from storage.
+2. `tflite` - allows for running Tensorflow Lite models. We use the PoseNet model to determine pose keypoints.
+3. `fl_chart` - used for plotting length-for-age and height-for-age curves.
+4. `sqflite` - allows for persistent storage of parent data, child data and measurements.
+5. `intl` - used for DateTime parsing/formatting.
+6. `opencv` - local plugin to find a reference object and compute the pixels to real world factor.
 
-A few resources to get you started if this is your first Flutter project:
+## Usage
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Upon loading, the user is presented with a list of parent ID numbers. These can be searched to find an existing parent, or a new parent may be added.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Once a new parent has been added/found, a new child can be created, or an existing child can be updated.
+
+Measurements for the child can entered directly via text or after finding/taking a photo and processing.
