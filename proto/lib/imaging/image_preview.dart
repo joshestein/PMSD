@@ -119,9 +119,9 @@ class _ImagePreviewState extends State<ImagePreview> {
     for (int i = 0; i < positions.length - 1; i++) {
       Offset position = positions[i];
       Offset nextPosition = positions[i + 1];
-      height += (position - nextPosition).distance * _cmPerPixel;
+      height += (position - nextPosition).distance;
     }
-    return height;
+    return (height - _transformOffset.dy / 2) * _cmPerPixel;
   }
 
   @override
