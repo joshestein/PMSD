@@ -156,11 +156,12 @@ class _WeightForAgeChartState extends State<WeightForAgeChart> {
 
   Future<List<LineChartBarData>> _getLineData(context) async {
     List<FlSpot> existingMeasurements = (await widget.child.measurements)
+        .where((measurement) => measurement.weight != null)
         .map((measurement) => FlSpot(
               (measurement.date.difference(widget.child.dateOfBirth).inDays ~/
                       30)
                   .toDouble(),
-              measurement.weight ?? 0.0,
+              measurement.weight!,
             ))
         .toList();
 
