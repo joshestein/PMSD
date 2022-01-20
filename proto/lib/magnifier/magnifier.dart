@@ -59,12 +59,7 @@ class _MagnifierState extends State<Magnifier> {
     setState(() {
       double newX = widget.position.dx - (widget.diameter / 2 / widget.scale);
       double newY =
-          widget.position.dy - (widget.radius / 2 / widget.scale) + 25;
-
-      // if (_bubbleCrossesMagnifier()) {
-      //   final box = context.findRenderObject() as RenderBox;
-      //   newX -= ((box.size.width - widget.radius) / widget.scale);
-      // }
+          widget.position.dy - (widget.diameter / 2 / widget.scale) + 18.33;
 
       // Order of operations is important. First scale, then translate.
       final Matrix4 updatedMatrix = Matrix4.identity()
