@@ -38,13 +38,26 @@ class _ImageLoaderState extends State<ImageLoader> {
           );
   }
 
+  Widget loading(BuildContext context) {
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      const Center(
+        child: CircularProgressIndicator(),
+      ),
+      Padding(
+          padding: const EdgeInsets.all(16),
+          child: Center(
+              child: Text('Processing...',
+                  style: Theme.of(context).textTheme.headline5))),
+    ]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.center,
       fit: StackFit.expand,
       children: [
-        const Center(child: Text('Loading...')),
+        loading(context),
         _getImage(),
         FutureBuilder<Size>(
             future: getImageSize(widget.imagePath),
@@ -81,8 +94,7 @@ class _ImageLoaderState extends State<ImageLoader> {
           originalSize: originalSize,
           renderedSize: renderedSize);
     } else {
-      return Text('Loading...',
-          style: Theme.of(context).primaryTextTheme.headline5);
+      return loading(context);
     }
   }
 }
