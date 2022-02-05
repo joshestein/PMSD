@@ -27,8 +27,8 @@ class _AddPatientFormState extends State<AddPatientForm> {
   @override
   initState() {
     super.initState();
-    _parent = widget.parent ?? Parent(idCardNo: 'dummy');
-    _child = widget.child ?? Child(parentId: -1, name: 'dummy');
+    _parent = widget.parent ?? Parent(idCardNo: 'mock');
+    _child = widget.child ?? Child(parentId: -1, name: 'mock');
   }
 
   List<Widget> _buildParentDetailsForm() {
