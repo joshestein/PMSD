@@ -4,7 +4,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:proto/charts/weight_for_age_data.dart';
 import 'package:proto/charts/length_for_age_data.dart';
 import 'package:collection/collection.dart';
+import 'package:proto/measurement/measurement_data.dart';
 import 'package:proto/models/child.dart';
+import 'package:proto/models/measurement.dart';
 
 class WeightForAgeChart extends StatefulWidget {
   final Child child;
@@ -19,6 +21,8 @@ class WeightForAgeChart extends StatefulWidget {
 }
 
 class _WeightForAgeChartState extends State<WeightForAgeChart> {
+  late List<Measurement> _existingMeasurements;
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<LineChartBarData>>(
@@ -84,7 +88,27 @@ class _WeightForAgeChartState extends State<WeightForAgeChart> {
     bool rotated = Orientation.landscape == orientation;
 
     return LineChartData(
-      lineTouchData: LineTouchData(enabled: false),
+      lineTouchData: LineTouchData(
+        handleBuiltInTouches: false,
+        touchCallback: (FlTouchEvent event, touchResponse) {
+          if (event is FlTapUpEvent) {
+            // There should be 6 curves (including existing measurements).
+            if (touchResponse!.lineBarSpots!.length != 6) {
+              return;
+            } else {
+              int index = touchResponse.lineBarSpots![5].spotIndex;
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => MeasurementData(
+                    child: widget.child,
+                    measurement: _existingMeasurements[index],
+                  ),
+                ),
+              );
+            }
+          }
+        },
+      ),
       gridData: FlGridData(
         show: true,
         drawHorizontalLine: true,
@@ -155,7 +179,10 @@ class _WeightForAgeChartState extends State<WeightForAgeChart> {
   }
 
   Future<List<LineChartBarData>> _getLineData(context) async {
-    List<FlSpot> existingMeasurements = (await widget.child.measurements)
+    List<Measurement> measurements = await widget.child.measurements;
+    _existingMeasurements = measurements;
+
+    List<FlSpot> spotMeasurements = measurements
         .where((measurement) => measurement.weight != null)
         .map((measurement) => FlSpot(
               (measurement.date.difference(widget.child.dateOfBirth).inDays ~/
@@ -172,7 +199,7 @@ class _WeightForAgeChartState extends State<WeightForAgeChart> {
           colors: [Theme.of(context).colorScheme.primary],
           dotData: FlDotData(show: true),
           barWidth: 2,
-          spots: existingMeasurements),
+          spots: spotMeasurements),
     ];
   }
 
