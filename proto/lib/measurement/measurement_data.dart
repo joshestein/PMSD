@@ -60,8 +60,13 @@ class _MeasurementDataState extends State<MeasurementData> {
                         ),
                         onPressed: () {
                           deleteMeasurement(_measurement);
-                          Navigator.of(context).pop(); // Close dialog
-                          Navigator.of(context).pop(); // Go back to charts
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ImagePickerScreen(
+                                child: widget.child,
+                              ),
+                            ),
+                          );
                         },
                       ),
                     ],
