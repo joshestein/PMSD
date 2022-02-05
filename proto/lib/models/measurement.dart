@@ -4,10 +4,10 @@ import 'package:sqflite/sqflite.dart';
 
 class Measurement {
   final int childId;
-  final double height;
-  final DateTime date;
+  double height;
+  DateTime date;
   final int? id;
-  final double? weight;
+  double? weight;
 
   Measurement(
       {required this.childId,
@@ -36,9 +36,13 @@ class Measurement {
 }
 
 Future<void> insertMeasurement(Measurement measurement) async {
+  print(await db.query('measurements',
+      where: 'measurement_id = ?', whereArgs: [measurement.id]));
   await db.insert(
     'measurements',
     measurement.toMap(),
     conflictAlgorithm: ConflictAlgorithm.replace,
   );
+  print(await db.query('measurements',
+      where: 'measurement_id = ?', whereArgs: [measurement.id]));
 }
