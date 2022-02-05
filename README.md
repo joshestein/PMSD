@@ -21,6 +21,6 @@ The real-world object chosen is a [Bicycle Poker playing card](https://en.wikipe
 
 ### TODO
 
-- Add documentation
+- Improve documentation
 - Add tests
 - Update to newer tensorflow plugin, use newer Pose model
