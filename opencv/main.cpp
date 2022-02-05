@@ -16,6 +16,8 @@ const double CARD_LENGTH = 8.9;
 std::vector<std::vector<cv::Point>> findSquares(
     const std::vector<std::vector<cv::Point>> &contours);
 int getLargestContourIndex(const std::vector<std::vector<cv::Point>> &contours);
+std::pair<double, double> getMillimetresPerPixel(
+    const std::vector<Point> &square);
 std::pair<double, double> getMillimetresPerPixel(const Point2f vertices[]);
 void drawKeypoints();
 
@@ -59,23 +61,6 @@ int main(int argc, char **argv) {
   }
   int largestContourIndex = getLargestContourIndex(squares);
   RotatedRect rect = minAreaRect(squares[largestContourIndex]);
-  drawKeypoints();
-
-  for (int i = 0; i < 4; i++) {
-    std::cout << squares[largestContourIndex][i] << std::endl;
-  }
-
-  double y1 = fabs(squares[largestContourIndex][0].y - squares[largestContourIndex][1].y);
-  double y2 = fabs(squares[largestContourIndex][2].y - squares[largestContourIndex][3].y);
-  double x1 = fabs(squares[largestContourIndex][0].x - squares[largestContourIndex][3].x);
-  double x2 = fabs(squares[largestContourIndex][1].x - squares[largestContourIndex][2].x);
-  // Instead of taking the average could also take the midpoints of each line.
-  double dy = (y1 + y2) / 2;
-  double dx = (x1 + x2) / 2;
-
-  double millimetresPerPixelX = A4_WIDTH / dx;
-  double millimetresPerPixelY = A4_LENGTH / dy;
-  std::cout << millimetresPerPixelX << ", " << millimetresPerPixelY << std::endl;
 
   // TODO: how does this fitted rect compare for accuracy compared to directly
   // using the contour?
@@ -145,11 +130,21 @@ int getLargestContourIndex(
   return largestContourIndex;
 }
 
-std::pair<double, double> getMillimetresPerPixel(const Point2f vertices[]) {
-  for (int i = 0; i < 4; i++) {
-    std::cout << "vertex: " << vertices[i] << std::endl;
-  }
+std::pair<double, double> getMillimetresPerPixel(
+    const std::vector<Point> &square) {
+  double y1 = fabs(square[0].y - square[1].y);
+  double y2 = fabs(square[2].y - square[3].y);
+  double x1 = fabs(square[0].x - square[3].x);
+  double x2 = fabs(square[1].x - square[2].x);
 
+  // Instead of taking the average could also take the midpoints of each line.
+  double dy = (y1 + y2) / 2;
+  double dx = (x1 + x2) / 2;
+
+  return std::make_pair(dx, dy);
+}
+
+std::pair<double, double> getMillimetresPerPixel(const Point2f vertices[]) {
   Point2d width1 = Point2d((vertices[0].x + vertices[3].x) / 2,
                            (vertices[0].y + vertices[3].y) / 2);
   Point2d width2 = Point2d((vertices[1].x + vertices[2].x) / 2,
