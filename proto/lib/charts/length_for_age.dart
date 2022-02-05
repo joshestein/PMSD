@@ -92,11 +92,17 @@ class _LengthForAgeChartState extends State<LengthForAgeChart> {
         handleBuiltInTouches: false,
         touchCallback: (FlTouchEvent event, touchResponse) {
           if (event is FlTapUpEvent) {
-            // There should be 6 curves (including existing measurements).
-            if (touchResponse!.lineBarSpots!.length != 6) {
+            int length = touchResponse!.lineBarSpots!.length;
+            // There are 7 curves with a fitted line. A fitted line will be drawn
+            // when there are more than 3 existing measurements.
+            // Otherwise there are 6 curves - median, two standard deviations in
+            // either direction and the existing measurements.
+            if (_existingMeasurements.length > 3 && length != 7 ||
+                _existingMeasurements.length < 3 && length != 6) {
               return;
             } else {
-              int index = touchResponse.lineBarSpots![5].spotIndex;
+              // The last line is composed of the actual measurements.
+              int index = touchResponse.lineBarSpots![length - 1].spotIndex;
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => MeasurementData(
