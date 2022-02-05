@@ -71,13 +71,21 @@ int main(int argc, char **argv) {
   }
 
   std::pair<double, double> mmPerPixel = getMillimetresPerPixel(vertices);
-  std::cout << "mmPerPixel vertices: " << mmPerPixel.first << " " << mmPerPixel.second << std::endl;
-  double xDist = fabs(keyPoints[2][0] - keyPoints[16][0]);
-  double yDist = fabs(keyPoints[2][1] - keyPoints[16][1]);
-  std::cout << sqrt(pow(xDist * mmPerPixel.first, 2) + pow(yDist * mmPerPixel.second, 2)) << std::endl;
+  std::cout << "mmPerPixel vertices: " << mmPerPixel.first << " "
+            << mmPerPixel.second << std::endl;
+  std::cout << "average: " << (mmPerPixel.first + mmPerPixel.second) / 2
+            << std::endl;
+  double xDist = fabs(keyPoints[2][0] - keyPoints[15][0]);
+  double yDist = fabs(keyPoints[2][1] - keyPoints[15][1]);
+  std::cout << "xDist: " << xDist << ", yDist " << yDist << std::endl;
+  std::cout << sqrt(pow(xDist * mmPerPixel.first, 2) +
+                    pow(yDist * mmPerPixel.second, 2))
+            << std::endl;
 
-  // polylines(image, squares[largestContourIndex], true, Scalar(0, 255, 0), 3, LINE_AA);
-  line(image, Point(keyPoints[2][0], keyPoints[2][1]), Point(keyPoints[16][0], keyPoints[16][1]), Scalar(0, 0, 255), 5,
+  // polylines(image, squares[largestContourIndex], true, Scalar(0, 255, 0), 3,
+  // LINE_AA);
+  line(image, Point(keyPoints[2][0], keyPoints[2][1]),
+       Point(keyPoints[15][0], keyPoints[15][1]), Scalar(0, 0, 255), 5,
        LINE_AA);
 
   const char *sourceWindow = "Source";
