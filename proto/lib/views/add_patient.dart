@@ -7,8 +7,9 @@ import 'package:proto/models/parent.dart';
 
 class AddPatientForm extends StatefulWidget {
   final Parent? parent;
+  final Child? child;
 
-  const AddPatientForm({Key? key, this.parent}) : super(key: key);
+  const AddPatientForm({Key? key, this.parent, this.child}) : super(key: key);
 
   @override
   _AddPatientFormState createState() => _AddPatientFormState();
