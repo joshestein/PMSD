@@ -4,10 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:proto/charts/fullscreen_length_for_age.dart';
-import 'package:proto/charts/fullscreen_weight_for_age.dart';
-import 'package:proto/charts/length_for_age.dart';
-import 'package:proto/charts/weight_for_age.dart';
+import 'package:proto/charts/chart.dart';
+import 'package:proto/charts/chart_utils.dart';
+import 'package:proto/charts/fullscreen_chart.dart';
 import 'package:proto/imaging/image_loader.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/measurement/measurement_data.dart';
@@ -74,12 +73,12 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) =>
-                        FullScreenLengthForAge(child: widget.child),
+                    builder: (context) => FullScreenChart(
+                        child: widget.child, type: ChartType.lengthForAge),
                   ),
                 );
               },
-              child: LengthForAgeChart(child: widget.child),
+              child: Chart(child: widget.child, type: ChartType.lengthForAge),
             ),
           ),
           const SizedBox(height: 10),
@@ -88,12 +87,12 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) =>
-                        FullScreenWeightForAge(child: widget.child),
+                    builder: (context) => FullScreenChart(
+                        child: widget.child, type: ChartType.weightForAge),
                   ),
                 );
               },
-              child: WeightForAgeChart(child: widget.child),
+              child: Chart(child: widget.child, type: ChartType.weightForAge),
             ),
           ),
         ],
