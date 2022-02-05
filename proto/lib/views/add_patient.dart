@@ -17,23 +17,26 @@ class AddPatientForm extends StatefulWidget {
 
 class _AddPatientFormState extends State<AddPatientForm> {
   final _formKey = GlobalKey<FormState>();
+  late Parent _parent;
+  late Child _child;
+
   // TODO: make other sections collapse when current section is active
   // bool _parentCollapsed = false;
   // bool _childCollapsed = true;
-  String? _idNo;
-  String? _name;
-  String? _number;
-  String? _email;
-  String? _childName;
-  String _childSex = 'M';
-  DateTime _childDOB = DateTime.now();
+
+  @override
+  initState() {
+    super.initState();
+    _parent = widget.parent ?? Parent(idCardNo: 'dummy');
+    _child = widget.child ?? Child(parentId: -1, name: 'dummy');
+  }
 
   List<Widget> _buildParentDetailsForm() {
     return [
       Padding(
         padding: const EdgeInsets.all(16.0),
         child: TextFormField(
-          onSaved: (newValue) => _idNo = newValue,
+          onSaved: (idNo) => {if (idNo != null) _parent.idCardNo = idNo},
           enabled: widget.parent == null,
           initialValue: widget.parent?.idCardNo,
           decoration: const InputDecoration(
@@ -51,9 +54,8 @@ class _AddPatientFormState extends State<AddPatientForm> {
       Padding(
         padding: const EdgeInsets.all(16.0),
         child: TextFormField(
-          enabled: widget.parent == null,
+          onSaved: (name) => _parent.name = name,
           initialValue: widget.parent?.name,
-          onSaved: (newValue) => _name = newValue,
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
             labelText: 'Parent Name',
@@ -63,8 +65,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
       Padding(
         padding: const EdgeInsets.all(16.0),
         child: TextFormField(
-          onSaved: (newValue) => _number = newValue,
-          enabled: widget.parent == null,
+          onSaved: (number) => _parent.number = number,
           initialValue: widget.parent?.number,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
@@ -76,8 +77,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
       Padding(
         padding: const EdgeInsets.all(16.0),
         child: TextFormField(
-          onSaved: (newValue) => _email = newValue,
-          enabled: widget.parent == null,
+          onSaved: (email) => _parent.email = email,
           initialValue: widget.parent?.email,
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
@@ -93,7 +93,8 @@ class _AddPatientFormState extends State<AddPatientForm> {
       Padding(
         padding: const EdgeInsets.all(16.0),
         child: TextFormField(
-          onSaved: (newValue) => _childName = newValue,
+          initialValue: widget.child?.name,
+          onSaved: (name) => {if (name != null) _child.name = name},
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
             labelText: 'Child Name',
@@ -117,7 +118,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
             const SizedBox(width: 16.0),
             Expanded(
               child: DropdownButton<String>(
-                  value: _childSex,
+                  value: _child.sex,
                   isExpanded: true,
                   items: <String>['M', 'F'].map((String sex) {
                     return DropdownMenuItem<String>(
@@ -125,9 +126,9 @@ class _AddPatientFormState extends State<AddPatientForm> {
                       child: Text(sex),
                     );
                   }).toList(),
-                  onChanged: (value) {
+                  onChanged: (sex) {
                     setState(() {
-                      _childSex = value!;
+                      _child.sex = sex!;
                     });
                   }),
             ),
@@ -137,10 +138,10 @@ class _AddPatientFormState extends State<AddPatientForm> {
       Padding(
         padding: const EdgeInsets.all(16.0),
         child: DatePicker(
-            initialDate: _childDOB,
+            initialDate: widget.child?.dateOfBirth,
             onDateChanged: (newDate) {
               setState(() {
-                _childDOB = newDate;
+                _child.dateOfBirth = newDate;
               });
             }),
       ),
@@ -182,19 +183,13 @@ class _AddPatientFormState extends State<AddPatientForm> {
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
             _formKey.currentState!.save();
-            int parentId = widget.parent?.id ??
-                await insertParent(
-                  Parent(
-                      idCardNo: _idNo!,
-                      name: _name,
-                      number: _number,
-                      email: _email),
-                );
-            Child child = await _insertAndReturnChild(parentId);
+            int parentId = await insertParent(_parent);
+            _child.parentId = parentId;
+            await insertChild(_child);
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ImagePickerScreen(child: child),
+                builder: (context) => ImagePickerScreen(child: _child),
               ),
             );
           }
@@ -202,15 +197,5 @@ class _AddPatientFormState extends State<AddPatientForm> {
         child: const Icon(Icons.check),
       ),
     );
-  }
-
-  Future<Child> _insertAndReturnChild(int parentId) async {
-    Child child = Child(
-        parentId: parentId,
-        name: _childName!,
-        sex: _childSex,
-        inputDOB: _childDOB);
-    await insertChild(child);
-    return child;
   }
 }
