@@ -4,10 +4,10 @@ import 'package:proto/models/measurement.dart';
 import 'package:sqflite/sqflite.dart';
 
 class Child {
-  final int parentId;
-  final String name;
-  final String sex;
-  final DateTime dateOfBirth;
+  int parentId;
+  String name;
+  String sex;
+  DateTime dateOfBirth;
   int? id;
 
   Child({

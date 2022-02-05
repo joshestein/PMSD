@@ -2,13 +2,13 @@ import 'package:proto/main.dart';
 import 'package:sqflite/sqflite.dart';
 
 class Parent {
-  final String idCardNo;
-  final int? id;
-  final String? name;
-  final String? number;
-  final String? email;
+  String idCardNo;
+  int? id;
+  String? name;
+  String? number;
+  String? email;
 
-  const Parent({
+  Parent({
     required this.idCardNo,
     this.id,
     this.name,
