@@ -12,6 +12,14 @@ const std::string BASE_DIR =
     "/home/josh/Documents/Masters/3rd_semester/PMSD/baby_pics/";
 const double CARD_WIDTH = 6.4;
 const double CARD_LENGTH = 8.9;
+const double keyPoints[17][2] = {
+    {1537.2505, 1324.2544}, {1597.3542, 1272.2341}, {1474.3518, 872.5739},
+    {1672.317, 1315.3651},  {1385.0248, 1318.4287}, {1659.7916, 1627.3799},
+    {1358.9337, 1628.7102}, {1732.4188, 1778.1388}, {1250.407, 1860.8646},
+    {1762.9397, 2011.7633}, {1250.7213, 2006.9899}, {1602.0388, 2132.0288},
+    {1417.0941, 2142.7092}, {1638.6486, 2582.6636}, {1370.3541, 2536.4966},
+    {1610.2429, 2861.1414}, {1405.6125, 2877.238},
+};
 
 std::vector<std::vector<cv::Point>> findSquares(
     const std::vector<std::vector<cv::Point>> &contours);
@@ -35,7 +43,7 @@ static double angle(Point pt1, Point pt2, Point pt0) {
 Mat image, imageGray, dst;
 
 int main(int argc, char **argv) {
-  std::string imageName = BASE_DIR + "card_far.jpg";
+  std::string imageName = BASE_DIR + "towel_close.jpg";
   if (argc > 1) {
     imageName = argv[1];
   }
