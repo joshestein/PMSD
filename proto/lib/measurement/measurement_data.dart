@@ -8,12 +8,12 @@ import 'package:proto/models/measurement.dart';
 /// Allows for manually entering measurements for a child.
 /// [height] allows for optional initial height.
 class MeasurementData extends StatefulWidget {
-  final double? height;
+  final Measurement? measurement;
   final Child child;
 
   const MeasurementData({
     Key? key,
-    this.height,
+    this.measurement,
     required this.child,
   }) : super(key: key);
 
@@ -23,9 +23,14 @@ class MeasurementData extends StatefulWidget {
 
 class _MeasurementDataState extends State<MeasurementData> {
   final _formKey = GlobalKey<FormState>();
-  double? _weight;
-  double? _height; // May be modified via form
-  DateTime? _date;
+  late Measurement _measurement;
+
+  @override
+  void initState() {
+    super.initState();
+    _measurement =
+        widget.measurement ?? Measurement(childId: widget.child.id!, height: 0);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +47,10 @@ class _MeasurementDataState extends State<MeasurementData> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
-                  initialValue: widget.height?.toStringAsFixed(2),
+                  initialValue: widget.measurement?.height.toStringAsFixed(2),
                   keyboardType: TextInputType.number,
-                  onSaved: (value) => _height = double.parse(value!),
+                  onSaved: (value) =>
+                      _measurement.height = double.parse(value!),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a height';
@@ -58,7 +64,9 @@ class _MeasurementDataState extends State<MeasurementData> {
                   ),
                 ),
                 TextFormField(
-                  onSaved: (value) => _weight = double.tryParse(value!),
+                  initialValue: widget.measurement?.weight?.toStringAsFixed(2),
+                  onSaved: (value) =>
+                      _measurement.weight = double.tryParse(value!),
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
@@ -71,7 +79,7 @@ class _MeasurementDataState extends State<MeasurementData> {
                   label: 'Date of measurement',
                   onDateChanged: (newDate) {
                     setState(() {
-                      _date = newDate;
+                      _measurement.date = newDate;
                     });
                   },
                 )
@@ -84,13 +92,7 @@ class _MeasurementDataState extends State<MeasurementData> {
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             _formKey.currentState!.save();
-            Measurement measurement = Measurement(
-              childId: widget.child.id!,
-              height: _height!,
-              weight: _weight,
-              inputDate: _date,
-            );
-            insertMeasurement(measurement);
+            insertMeasurement(_measurement);
 
             Navigator.of(context).push(
               MaterialPageRoute(
