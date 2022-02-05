@@ -10,6 +10,7 @@ import 'package:proto/measurement/measurement_data.dart';
 import 'package:proto/magnifier/magnifier.dart';
 import 'package:proto/magnifier/touch_bubble.dart';
 import 'package:proto/models/child.dart';
+import 'package:proto/models/measurement.dart';
 import 'package:proto/pose_detector.dart';
 
 /// Runs pose inference, and displays configurable keypoints in a stack above the image.
@@ -160,7 +161,10 @@ class _ImagePreviewState extends State<ImagePreview> {
                               MaterialPageRoute(
                                 builder: (context) => MeasurementData(
                                   child: widget.child,
-                                  height: _getHeight(),
+                                  measurement: Measurement(
+                                    childId: widget.child.id!,
+                                    height: _getHeight(),
+                                  ),
                                 ),
                               ),
                             );
