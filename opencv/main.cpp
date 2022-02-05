@@ -122,7 +122,8 @@ int getLargestContourIndex(
   int largestContourArea = 0;
   for (int i = 0; i < contours.size(); i++) {
     int currentContourArea = contourArea(contours[i]);
-    if (currentContourArea > largestContourArea) {
+    if (currentContourArea > largestContourArea &&
+        currentContourArea < 1000000) {
       largestContourArea = currentContourArea;
       largestContourIndex = i;
     }
