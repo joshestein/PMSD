@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:proto/charts/length_for_age_data.dart';
 import 'package:collection/collection.dart';
+import 'package:proto/line_fitting.dart';
 import 'package:proto/measurement/measurement_data.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/models/measurement.dart';
@@ -192,6 +193,7 @@ class _LengthForAgeChartState extends State<LengthForAgeChart> {
 
     return [
       ..._getSDCurves(),
+      if (measurements.length > 3) _getBestFit(measurements),
       LineChartBarData(
           isCurved: true,
           colors: [Theme.of(context).colorScheme.primary],
@@ -199,6 +201,35 @@ class _LengthForAgeChartState extends State<LengthForAgeChart> {
           barWidth: 2,
           spots: spotMeasurements),
     ];
+  }
+
+  LineChartBarData _getBestFit(List<Measurement> measurements) {
+    List<double> dates = measurements
+        .map((m) => (m.date.difference(widget.child.dateOfBirth).inDays ~/ 30)
+            .toDouble())
+        .toList();
+    List<double> heights = measurements.map((m) => m.height).toList();
+    LineFitter lineFitter = LineFitter(dates, heights);
+    List<double> coefficients = lineFitter.coefficients;
+
+    List<FlSpot> bestFit = age
+        .map((month) {
+          return FlSpot(
+            month,
+            coefficients[0] + coefficients[1] * month,
+          );
+        })
+        .where((spot) => spot.y <= 100)
+        .toList();
+
+    return LineChartBarData(
+      isCurved: false,
+      dashArray: [4, 4],
+      colors: [Theme.of(context).colorScheme.onBackground.withOpacity(0.6)],
+      dotData: FlDotData(show: false),
+      barWidth: 2,
+      spots: bestFit,
+    );
   }
 
   List<LineChartBarData> _getSDCurves() {
