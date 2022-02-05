@@ -37,6 +37,40 @@ class _MeasurementDataState extends State<MeasurementData> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Measurement Data'),
+        actions: [
+          if (widget.measurement != null) ...[
+            IconButton(
+              icon: const Icon(Icons.delete_forever),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('Delete Measurement'),
+                    content: const Text(
+                        'Are you sure you want to delete this measurement?'),
+                    actions: [
+                      TextButton(
+                        child: const Text('Cancel'),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                      ElevatedButton(
+                        child: const Text('Delete'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red[800],
+                        ),
+                        onPressed: () {
+                          deleteMeasurement(_measurement);
+                          Navigator.of(context).pop(); // Close dialog
+                          Navigator.of(context).pop(); // Go back to charts
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ]
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
