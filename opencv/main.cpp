@@ -53,6 +53,10 @@ int main(int argc, char **argv) {
   // TODO: try RETR_EXTERNAL to get fewer, bigger contours
   findContours(imageGray, contours, RETR_LIST, CHAIN_APPROX_SIMPLE);
   squares = findSquares(contours);
+  if (squares.size() == 0) {
+    std::cout << "Could not find any squares" << std::endl;
+    return 1;
+  }
   int largestContourIndex = getLargestContourIndex(squares);
   RotatedRect rect = minAreaRect(squares[largestContourIndex]);
   drawKeypoints();
