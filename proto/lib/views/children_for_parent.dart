@@ -71,6 +71,15 @@ class _ChildrenForParentState extends State<ChildrenForParent> {
                     ),
                   );
                 },
+                onLongPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddPatientForm(
+                          parent: widget.parent, child: _children[index]),
+                    ),
+                  );
+                },
               );
             },
             separatorBuilder: (context, index) {
