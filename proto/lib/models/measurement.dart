@@ -36,13 +36,17 @@ class Measurement {
 }
 
 Future<void> insertMeasurement(Measurement measurement) async {
-  print(await db.query('measurements',
-      where: 'measurement_id = ?', whereArgs: [measurement.id]));
   await db.insert(
     'measurements',
     measurement.toMap(),
     conflictAlgorithm: ConflictAlgorithm.replace,
   );
-  print(await db.query('measurements',
-      where: 'measurement_id = ?', whereArgs: [measurement.id]));
+}
+
+Future<void> deleteMeasurement(Measurement measurement) async {
+  await db.delete(
+    'measurements',
+    where: 'measurement_id = ?',
+    whereArgs: [measurement.id],
+  );
 }
