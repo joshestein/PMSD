@@ -2,7 +2,7 @@
 
 This is a local flutter plugin to allow for native OpenCV code. Although not straightforward to setup, the resulting plugin allows for _any_ OpenCV function to be called on both Android and iOS.
 
-Fundamentally, we use Dart's [Foreign Function Interface (FFI)](https://docs.flutter.dev/development/platform-integration/c-interop#compiled-dynamic-library) to allow calling native C code.
+Fundamentally, we use Dart's [Foreign Function Interface (FFI)](https://docs.flutter.dev/development/platform-integration/c-interop) to allow calling native C code.
 
 ## Setup
 
