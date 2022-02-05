@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:proto/charts/weight_for_age_data.dart';
 import 'package:proto/charts/length_for_age_data.dart';
 import 'package:collection/collection.dart';
+import 'package:proto/line_fitting.dart';
 import 'package:proto/measurement/measurement_data.dart';
 import 'package:proto/models/child.dart';
 import 'package:proto/models/measurement.dart';
@@ -92,11 +93,17 @@ class _WeightForAgeChartState extends State<WeightForAgeChart> {
         handleBuiltInTouches: false,
         touchCallback: (FlTouchEvent event, touchResponse) {
           if (event is FlTapUpEvent) {
-            // There should be 6 curves (including existing measurements).
-            if (touchResponse!.lineBarSpots!.length != 6) {
+            int length = touchResponse!.lineBarSpots!.length;
+            // There are 7 curves with a fitted line. A fitted line will be drawn
+            // when there are more than 3 existing measurements.
+            // Otherwise there are 6 curves - median, two standard deviations in
+            // either direction and the existing measurements.
+            if (_existingMeasurements.length > 3 && length != 7 ||
+                _existingMeasurements.length < 3 && length != 6) {
               return;
             } else {
-              int index = touchResponse.lineBarSpots![5].spotIndex;
+              // The last line is composed of the actual measurements.
+              int index = touchResponse.lineBarSpots![length - 1].spotIndex;
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => MeasurementData(
@@ -194,6 +201,7 @@ class _WeightForAgeChartState extends State<WeightForAgeChart> {
 
     return [
       ..._getSDCurves(),
+      if (measurements.length > 3) _getBestFit(measurements),
       LineChartBarData(
           isCurved: true,
           colors: [Theme.of(context).colorScheme.primary],
@@ -201,6 +209,39 @@ class _WeightForAgeChartState extends State<WeightForAgeChart> {
           barWidth: 2,
           spots: spotMeasurements),
     ];
+  }
+
+  LineChartBarData _getBestFit(List<Measurement> measurements) {
+    List<double> dates = measurements
+        .where((m) => m.weight != null)
+        .map((m) => (m.date.difference(widget.child.dateOfBirth).inDays ~/ 30)
+            .toDouble())
+        .toList();
+    List<double> weights = measurements
+        .where((m) => m.weight != null)
+        .map((m) => m.weight!)
+        .toList();
+    LineFitter lineFitter = LineFitter(dates, weights);
+    List<double> coefficients = lineFitter.coefficients;
+
+    List<FlSpot> bestFit = age
+        .map((month) {
+          return FlSpot(
+            month,
+            coefficients[0] + coefficients[1] * month,
+          );
+        })
+        .where((spot) => spot.y <= 100)
+        .toList();
+
+    return LineChartBarData(
+      isCurved: false,
+      dashArray: [4, 4],
+      colors: [Theme.of(context).colorScheme.onBackground.withOpacity(0.6)],
+      dotData: FlDotData(show: false),
+      barWidth: 2,
+      spots: bestFit,
+    );
   }
 
   List<LineChartBarData> _getSDCurves() {
