@@ -24,3 +24,6 @@ The real-world object chosen is a [Bicycle Poker playing card](https://en.wikipe
 - Improve documentation
 - Add tests
 - Update to newer tensorflow plugin, use newer Pose model
+- In-app walkthrough/tutorial
+- 2nd degree polynomial line of best fit
+- Add pics and overview of functionality to Wiki
