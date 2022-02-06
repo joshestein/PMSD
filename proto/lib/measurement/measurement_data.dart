@@ -116,6 +116,7 @@ class _MeasurementDataState extends State<MeasurementData> {
                 const SizedBox(height: 16),
                 DatePicker(
                   label: 'Date of measurement',
+                  initialDate: widget.measurement?.date,
                   onDateChanged: (newDate) {
                     setState(() {
                       _measurement.date = newDate;
